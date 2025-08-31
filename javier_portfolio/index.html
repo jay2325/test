@@ -1,0 +1,107 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Javier Hernandez · Sports & Entertainment Marketing Portfolio</title>
+  <meta name="description" content="Global campaigns, athlete storytelling, and data-backed case studies (Gatorade, sports/entertainment).">
+  <meta name="theme-color" content="#0b0d10">
+  <link rel="preload" href="styles/style.css" as="style">
+  <link rel="stylesheet" href="styles/style.css">
+</head>
+<body>
+  <a class="sr-only" href="#projects">Skip to projects</a>
+
+  <header>
+    <div class="container nav-wrap">
+      <div class="brand" aria-label="Site identity">
+        <div class="logo" aria-hidden="true">JH</div>
+        <div>
+          <h1>Javier Hernandez</h1>
+          <p>Sports & Entertainment Marketing · Campaign Program Management · EN/ES</p>
+        </div>
+      </div>
+      <nav aria-label="Primary">
+        <a href="#projects">Work</a>
+        <a href="#about">About</a>
+        <a href="#contact">Contact</a>
+        <button class="toggle" id="themeToggle" aria-label="Toggle theme">◐</button>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero container">
+      <h2>Global brand campaigns, athlete storytelling, and measurable impact.</h2>
+      <p>I coordinate end‑to‑end campaigns across TV, OOH, social, and influencer—aligning creative, production, PR, media, and legal to deliver on time and on budget. This portfolio focuses on selected work and evidence‑backed case studies.</p>
+      <div class="cta">
+        <a class="btn" href="#projects">See Work</a>
+        <a class="btn ghost" href="#contact">Contact</a>
+      </div>
+    </section>
+
+    <section id="projects" class="container" aria-labelledby="projects-title">
+      <div class="section-head">
+        <h3 id="projects-title">Selected Work</h3>
+        <div class="controls">
+          <label for="filter" class="sr-only">Filter by tag</label>
+          <select id="filter"></select>
+          <label for="search" class="sr-only">Search</label>
+          <input type="search" id="search" placeholder="Search..." />
+        </div>
+      </div>
+      <div id="grid" class="grid" aria-live="polite"></div>
+    </section>
+
+    <section id="about" class="container about">
+      <h3>About</h3>
+      <p>Brand Supervisor at TBWA\Chiat\Day (Gatorade). I manage athlete shoots, external agencies, campaign decks for executive reviews, and asset governance for North America & LATAM. I’m focused on sports storytelling that moves culture <em>and</em> delivers measurable outcomes.</p>
+      <ul class="bullets">
+        <li>Cross‑functional orchestration (creative, production, legal, PR, media)</li>
+        <li>Deck‑building & executive communications</li>
+        <li>Asset libraries & quality control (Art, AV, Social)</li>
+        <li>Influencer toolkits & creator ops</li>
+        <li>Testing integration & KPI reporting (ADA Amplify)</li>
+      </ul>
+    </section>
+
+    <section id="contact" class="container contact">
+      <h3>Contact</h3>
+      <p>Open to roles in entertainment & tech (program management, brand systems, PMM). For evidence‑backed case studies, request access below.</p>
+      <div class="cta">
+        <a class="btn" href="mailto:jjaviehernandezz@gmail.com">Email</a>
+        <a class="btn ghost" target="_blank" rel="noopener" href="https://www.linkedin.com/in/javier-hernandez-00b71bb7/">LinkedIn</a>
+      </div>
+    </section>
+  </main>
+
+  <dialog id="projectModal" aria-label="Project details">
+    <button class="close" aria-label="Close">✕</button>
+    <div class="modal">
+      <div class="media" id="modalMedia"></div>
+      <div class="copy">
+        <h4 id="modalTitle"></h4>
+        <p class="subtitle" id="modalSubtitle"></p>
+        <p class="summary" id="modalSummary"></p>
+        <div class="meta">
+          <div><strong>Role</strong><div id="modalRole"></div></div>
+          <div><strong>Year</strong><div id="modalYear"></div></div>
+          <div><strong>Channels</strong><div id="modalChannels"></div></div>
+        </div>
+        <div class="metrics">
+          <strong>Outcomes</strong>
+          <ul id="modalMetrics"></ul>
+          <p class="evidence" id="modalEvidence"></p>
+        </div>
+        <div class="tags" id="modalTags"></div>
+      </div>
+    </div>
+  </dialog>
+
+  <footer>
+    <div class="container">© <span id="year"></span> Javier Hernandez · Built with semantic HTML, accessible patterns, no frameworks.</div>
+  </footer>
+
+  <script src="scripts/main.js" defer></script>
+</body>
+</html>

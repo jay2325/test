@@ -1,0 +1,70 @@
+{
+  "projects": [
+    {
+      "title": "Gatorlyte Launch \u2014 Jayson Tatum",
+      "brand": "Gatorade",
+      "campaign": "Rapid Rehydration",
+      "year": "2023",
+      "role": "Campaign Coordination \u00b7 Shoot Support \u00b7 Asset QC",
+      "summary": "Introduced Gatorlyte within the Gatorade portfolio, balancing athlete storytelling with product education (5\u2011electrolyte blend). Managed multi\u2011day shoot logistics, cross\u2011team review cycles, and asset delivery across TV, OOH, and social.",
+      "channels": [
+        "TV",
+        "OOH",
+        "YouTube",
+        "TikTok",
+        "Social"
+      ],
+      "badges": [
+        "Athlete",
+        "Multi-channel"
+      ],
+      "tags": [
+        "sports",
+        "tv",
+        "social"
+      ],
+      "video": "https://www.youtube.com/embed/XXXXXXXX",
+      "cover": "assets/cover1.jpg",
+      "metrics": [
+        "Testing: above-norm creative/brand impact (replace with ADA figures)",
+        "Believability on \u2018rapid rehydration\u2019 (insert exact score)"
+      ],
+      "evidence": {
+        "label": "ADA Amplify Report",
+        "url": "#"
+      }
+    },
+    {
+      "title": "Efficacy Demo Modernization",
+      "brand": "Gatorade",
+      "campaign": "Hydration Science Film",
+      "year": "2023",
+      "role": "Program Management \u00b7 Stakeholder Alignment \u00b7 Asset Governance",
+      "summary": "Modernized the classic demo device to explain hydration efficacy. Coordinated with creative, legal, and scientific stakeholders and delivered localized assets for NA & LATAM.",
+      "channels": [
+        "TV",
+        "YouTube",
+        "Social",
+        "In-Store"
+      ],
+      "badges": [
+        "Science Storytelling",
+        "Asset System"
+      ],
+      "tags": [
+        "demo",
+        "science",
+        "evergreen"
+      ],
+      "image": "assets/cover2.jpg",
+      "metrics": [
+        "+PI uplift (replace with % and base from ADA)",
+        "Message clarity above benchmark (insert ADA figure)"
+      ],
+      "evidence": {
+        "label": "ADA Report",
+        "url": "#"
+      }
+    }
+  ]
+}
