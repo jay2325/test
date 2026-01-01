@@ -1,0 +1,262 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+generator client {
+  provider = "prisma-client"
+  output   = "../src/generated/prisma"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+enum UserRole {
+  OWNER
+}
+
+enum LeadSourceType {
+  HOSTED_FORM
+  FB_LEAD_AD
+  WEBSITE_WEBHOOK
+}
+
+enum LeadStatus {
+  NEW
+  CONTACTED
+  QUALIFYING
+  QUALIFIED
+  BOOKED
+  NURTURE
+  DISQUALIFIED
+  SUPPRESSED
+}
+
+enum ConversationChannel {
+  SMS
+}
+
+enum ConversationState {
+  ACTIVE
+  PAUSED_AGENT
+  CLOSED
+}
+
+enum ConversationAutomationState {
+  NONE
+  INTRO_SENT
+  Q1_SENT
+  Q2_SENT
+  Q3_SENT
+  DONE
+}
+
+enum MessageDirection {
+  INBOUND
+  OUTBOUND
+}
+
+enum MessageProvider {
+  TWILIO
+}
+
+enum LeadClassification {
+  HOT
+  WARM
+  NURTURE
+  JUNK
+}
+
+enum SuppressionReason {
+  STOP
+  MANUAL
+}
+
+enum JobType {
+  SCORE_LEAD
+  SEND_SMS
+  FOLLOW_UP
+  CRM_SYNC
+}
+
+enum JobStatus {
+  PENDING
+  RUNNING
+  DONE
+  FAILED
+}
+
+model Tenant {
+  id        String   @id @default(uuid()) @db.Uuid
+  name      String
+  slug      String   @unique
+  timezone  String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  users         User[]
+  settings      AgentSettings?
+  leadSources   LeadSource[]
+  leads         Lead[]
+  conversations Conversation[]
+  messages      Message[]
+  suppressions  Suppression[]
+  jobs          Job[]
+}
+
+model User {
+  id        String   @id @db.Uuid
+  tenantId  String   @db.Uuid
+  email     String   @unique
+  name      String?
+  role      UserRole @default(OWNER)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  tenant Tenant @relation(fields: [tenantId], references: [id], onDelete: Cascade)
+
+  @@index([tenantId])
+}
+
+model AgentSettings {
+  id                 String   @id @default(uuid()) @db.Uuid
+  tenantId           String   @unique @db.Uuid
+  twilioPhoneNumber  String?
+  calendlyUrl        String
+  quietHoursStart    Int      @default(8)
+  quietHoursEnd      Int      @default(20)
+  hotScoreThreshold  Int      @default(70)
+  warmScoreThreshold Int      @default(45)
+  createdAt          DateTime @default(now())
+  updatedAt          DateTime @updatedAt
+
+  tenant Tenant @relation(fields: [tenantId], references: [id], onDelete: Cascade)
+}
+
+model LeadSource {
+  id        String         @id @default(uuid()) @db.Uuid
+  tenantId  String         @db.Uuid
+  type      LeadSourceType
+  name      String
+  secret    String?
+  isActive  Boolean        @default(true)
+  createdAt DateTime       @default(now())
+  updatedAt DateTime       @updatedAt
+
+  tenant Tenant @relation(fields: [tenantId], references: [id], onDelete: Cascade)
+  leads  Lead[]
+
+  @@index([tenantId])
+  @@index([tenantId, type])
+}
+
+model Lead {
+  id                   String              @id @default(uuid()) @db.Uuid
+  tenantId             String              @db.Uuid
+  leadSourceId         String              @db.Uuid
+  externalLeadId       String?
+  firstName            String?
+  lastName             String?
+  email                String?
+  phoneE164            String
+  rawPayload           Json                @db.JsonB
+  status               LeadStatus          @default(NEW)
+  score                Int?
+  classification       LeadClassification?
+  classificationReason String?
+  intent               String?
+  timeline             String?
+  budgetRange          String?
+  location             String?
+  lastOutboundAt       DateTime?
+  lastInboundAt        DateTime?
+  bookedAt             DateTime?
+  createdAt            DateTime            @default(now())
+  updatedAt            DateTime            @updatedAt
+
+  tenant     Tenant     @relation(fields: [tenantId], references: [id], onDelete: Cascade)
+  leadSource LeadSource @relation(fields: [leadSourceId], references: [id], onDelete: Restrict)
+
+  conversations Conversation[]
+
+  @@unique([tenantId, leadSourceId, externalLeadId])
+  @@index([tenantId])
+  @@index([tenantId, createdAt])
+  @@index([tenantId, phoneE164])
+  @@index([tenantId, status])
+  @@index([tenantId, score])
+  @@index([tenantId, leadSourceId])
+}
+
+model Conversation {
+  id              String                      @id @default(uuid()) @db.Uuid
+  tenantId        String                      @db.Uuid
+  leadId          String                      @db.Uuid
+  channel         ConversationChannel
+  state           ConversationState           @default(ACTIVE)
+  automationState ConversationAutomationState @default(NONE)
+  createdAt       DateTime                    @default(now())
+  updatedAt       DateTime                    @updatedAt
+
+  tenant   Tenant    @relation(fields: [tenantId], references: [id], onDelete: Cascade)
+  lead     Lead      @relation(fields: [leadId], references: [id], onDelete: Cascade)
+  messages Message[]
+
+  @@unique([leadId, channel])
+  @@index([tenantId])
+  @@index([tenantId, updatedAt])
+}
+
+model Message {
+  id                String           @id @default(uuid()) @db.Uuid
+  tenantId          String           @db.Uuid
+  conversationId    String           @db.Uuid
+  direction         MessageDirection
+  from              String
+  to                String
+  body              String
+  provider          MessageProvider
+  providerMessageId String?
+  createdAt         DateTime         @default(now())
+
+  tenant       Tenant       @relation(fields: [tenantId], references: [id], onDelete: Cascade)
+  conversation Conversation @relation(fields: [conversationId], references: [id], onDelete: Cascade)
+
+  @@index([tenantId])
+  @@index([conversationId, createdAt])
+  @@index([providerMessageId])
+}
+
+model Suppression {
+  id        String            @id @default(uuid()) @db.Uuid
+  tenantId  String            @db.Uuid
+  phoneE164 String
+  reason    SuppressionReason
+  createdAt DateTime          @default(now())
+
+  tenant Tenant @relation(fields: [tenantId], references: [id], onDelete: Cascade)
+
+  @@unique([tenantId, phoneE164])
+  @@index([tenantId])
+}
+
+model Job {
+  id        String    @id @default(uuid()) @db.Uuid
+  tenantId  String    @db.Uuid
+  type      JobType
+  payload   Json      @db.JsonB
+  runAt     DateTime
+  status    JobStatus @default(PENDING)
+  attempts  Int       @default(0)
+  lastError String?
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @updatedAt
+
+  tenant Tenant @relation(fields: [tenantId], references: [id], onDelete: Cascade)
+
+  @@index([tenantId])
+  @@index([status, runAt])
+  @@index([tenantId, type])
+}
