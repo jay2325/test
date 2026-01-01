@@ -22,12 +22,30 @@ Set at least:
 - `DATABASE_URL` (your Supabase Postgres connection string)
 - `NEXT_PUBLIC_SUPABASE_URL`
 - `NEXT_PUBLIC_SUPABASE_ANON_KEY`
+- `CRON_SECRET` (used to protect `/api/cron/run-jobs`)
+
+- **(Optional) enable real scoring**
+
+- Set `OPENAI_API_KEY` to use OpenAI structured output scoring.
+- If not set, scoring uses a deterministic stub so you can still demo end-to-end.
 
 - **Run Prisma migrations**
 
 ```bash
-npx prisma migrate dev
+npm run db:migrate
 ```
+
+- **Seed demo tenant + lead sources**
+
+```bash
+npm run db:seed
+```
+
+This seeds:
+
+- `tenantSlug`: `demo`
+- website lead source secret: `demo_website_secret`
+- facebook lead source secret: `demo_fb_secret`
 
 - **Start dev server**
 
@@ -36,6 +54,38 @@ npm run dev
 ```
 
 Then open `http://localhost:3000`.
+
+### End-to-end local demo (ingest → jobs)
+
+With the dev server running:
+
+```bash
+npm run e2e:local
+```
+
+This will:
+
+- POST a sample lead to `POST /api/ingest/form` (hosted form ingest)
+- Call `POST /api/cron/run-jobs` twice (process SCORE_LEAD, then SEND_SMS/CRM_SYNC stubs)
+
+You should see logs like:
+
+- `[webhook] ...`
+- `[sms:stub] ...`
+
+### Ingestion endpoints (MVP v1)
+
+- `POST /api/ingest/form` (hosted form)
+  - body includes `tenantSlug`
+- `POST /api/ingest/website` (agent website webhook)
+  - header: `x-lead-source-secret: <secret>`
+- `POST /api/ingest/facebook` (FB lead ads via Zapier/Make posting normalized payload)
+  - header: `x-lead-source-secret: <secret>`
+
+### Cron job runner
+
+- `POST /api/cron/run-jobs`
+  - header: `x-cron-secret: <CRON_SECRET>`
 
 ### Auth routes
 
