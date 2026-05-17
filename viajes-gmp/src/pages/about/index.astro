@@ -5,10 +5,15 @@ import CTABand from '../../components/CTABand.astro';
 import Breadcrumbs from '../../components/Breadcrumbs.astro';
 import { business } from '../../config/business';
 
+const waUrl = "https://wa.me/18053044306?text=Hi!%20I%20found%20Viajes%20GMP%20and%20would%20like%20to%20know%20more%20about%20planning%20a%20trip.";
+
 const team = [
-  { name: 'Pedro Hernández', role: 'Travel planning and client support', initials: 'PH' },
-  { name: 'Desiree Juárez', role: 'Travel planning and client support', initials: 'DJ' },
-  { name: 'Micaela Peñaloza', role: 'Travel planning and client support', initials: 'MP' },
+  {
+    name: 'Javier Hernandez',
+    role: 'Founder & Lead Travel Planner',
+    initials: 'JH',
+    bio: 'Mexico-based travel planner with 20+ years of experience helping families, couples and groups plan trips across Mexico and Latin America.',
+  },
 ];
 
 const values = [
@@ -29,7 +34,7 @@ const values = [
   <section style="background:var(--color-sand);padding-block:5rem 4rem;">
     <div class="container" style="max-width:720px;">
       <p style="font-size:0.8rem;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:var(--color-terracotta);margin-bottom:0.875rem;">About Viajes GMP</p>
-      <h1 style="margin-bottom:1.25rem;">A Mexico-Based Travel Team With 20+ Years of Experience</h1>
+      <h1 style="margin-bottom:1.25rem;">Mexico travel planning from people who actually live here.</h1>
       <p style="font-size:1.1rem;color:var(--color-muted);line-height:1.7;">
         Viajes GMP helps travelers plan vacations, group trips, flights, hotels, transfers and experiences with human support from first idea to final itinerary.
       </p>
@@ -71,27 +76,22 @@ const values = [
   <!-- Team -->
   <section class="section section-sand" aria-labelledby="team-heading">
     <div class="container">
-      <h2 id="team-heading" style="text-align:center;margin-bottom:0.75rem;">Meet the people who help make the details easier.</h2>
-      <p style="text-align:center;color:var(--color-muted);margin-bottom:3rem;max-width:480px;margin-inline:auto;font-size:0.9rem;">
-        Replace role descriptions with accurate titles and photos before launch.
-      </p>
-      <div style="display:grid;grid-template-columns:1fr;gap:1.5rem;max-width:780px;margin-inline:auto;" class="team-grid">
+      <h2 id="team-heading" style="text-align:center;margin-bottom:3rem;">The person behind your trip.</h2>
+      <div style="display:grid;grid-template-columns:1fr;gap:1.5rem;max-width:400px;margin-inline:auto;">
         {team.map((member) => (
           <div style="background:var(--color-warm-white);border:1px solid #e8e2d8;border-radius:12px;padding:2rem;text-align:center;display:flex;flex-direction:column;align-items:center;gap:1rem;">
-            <!-- Avatar placeholder -->
+            <!-- TODO: Replace JH initials with real founder photo -->
             <div style="width:72px;height:72px;border-radius:50%;background:var(--color-ocean);display:flex;align-items:center;justify-content:center;">
               <span style="font-family:'Fraunces',Georgia,serif;font-size:1.25rem;font-weight:700;color:#fff;" aria-hidden="true">{member.initials}</span>
             </div>
             <div>
               <strong style="display:block;font-size:1.05rem;margin-bottom:0.25rem;">{member.name}</strong>
-              <p style="font-size:0.875rem;color:var(--color-muted);">{member.role}</p>
+              <p style="font-size:0.875rem;color:var(--color-muted);margin-bottom:0.5rem;">{member.role}</p>
+              <p style="font-size:0.875rem;color:var(--color-muted);line-height:1.6;">{member.bio}</p>
             </div>
           </div>
         ))}
       </div>
-      <p style="text-align:center;font-size:0.8rem;color:var(--color-muted);margin-top:1.5rem;">
-        ⚠️ Replace role descriptions, add photos and accurate titles before publishing this page.
-      </p>
     </div>
   </section>
 
@@ -110,7 +110,11 @@ const values = [
         </div>
         <div style="padding:1.25rem;border:1.5px solid #e8e2d8;border-radius:10px;display:flex;gap:1rem;align-items:flex-start;">
           <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" style="color:#25D366;flex-shrink:0;" aria-hidden="true"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.123.554 4.118 1.524 5.847L0 24l6.318-1.499A11.956 11.956 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 22c-1.903 0-3.68-.51-5.21-1.4l-.374-.221-3.752.89.938-3.658-.243-.381A9.945 9.945 0 012 12C2 6.477 6.477 2 12 2s10 4.477 10 10-4.477 10-10 10z"/></svg>
-          <div><strong style="display:block;font-size:0.85rem;margin-bottom:0.2rem;">WhatsApp</strong><a href={business.whatsappUrl} style="font-size:0.9rem;color:var(--color-muted);text-decoration:none;" target="_blank" rel="noopener noreferrer">Message us on WhatsApp</a></div>
+          <div>
+            <strong style="display:block;font-size:0.85rem;margin-bottom:0.2rem;">WhatsApp</strong>
+            <a href={waUrl} style="font-size:0.9rem;color:var(--color-muted);text-decoration:none;" target="_blank" rel="noopener noreferrer">Message us on WhatsApp</a>
+            <p style="font-size:0.75rem;color:var(--color-muted);margin-top:0.25rem;line-height:1.3;">Avg. reply within 1 hour · Mon–Sat, 9am–9pm CT</p>
+          </div>
         </div>
         <div style="padding:1.25rem;border:1.5px solid #e8e2d8;border-radius:10px;display:flex;gap:1rem;align-items:flex-start;">
           <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--color-ocean)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
@@ -130,7 +134,6 @@ const values = [
 <style>
   @media (min-width: 768px) {
     .about-grid { grid-template-columns: 1fr 1fr !important; }
-    .team-grid { grid-template-columns: repeat(3, 1fr) !important; }
     .contact-grid { grid-template-columns: 1fr 1fr !important; }
   }
 </style>

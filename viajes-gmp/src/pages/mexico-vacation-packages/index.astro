@@ -7,6 +7,8 @@ import CTABand from '../../components/CTABand.astro';
 import Breadcrumbs from '../../components/Breadcrumbs.astro';
 import { business } from '../../config/business';
 
+const waUrl = "https://wa.me/18053044306?text=Hi!%20I%27m%20interested%20in%20a%20Mexico%20vacation%20package%20%E2%80%94%20can%20you%20help%20me%20plan%3F";
+
 const categories = [
   { title: 'Beach vacations', desc: 'Cancún, Riviera Maya, Los Cabos, Puerto Vallarta and Riviera Nayarit.', href: '/cancun-riviera-maya-vacation-packages/' },
   { title: 'Family vacations', desc: 'Resorts, transfers and activities planned around children, grandparents, room setup and pace.', href: '/mexico-family-vacations/' },
@@ -62,16 +64,19 @@ const faqSchema = {
   <section style="background:var(--color-sand);padding-block:4rem 3.5rem;">
     <div class="container" style="max-width:740px;">
       <p style="font-size:0.8rem;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:var(--color-terracotta);margin-bottom:0.875rem;">Viajes GMP</p>
-      <h1 style="margin-bottom:1.25rem;">Mexico Vacation Packages Built Around You</h1>
+      <h1 style="margin-bottom:1.25rem;">Mexico trips planned by people who actually live here.</h1>
       <p style="font-size:1.05rem;color:var(--color-muted);line-height:1.7;margin-bottom:2rem;">
         From beach resorts and family trips to cultural weekends and private experiences, Viajes GMP helps you create a Mexico itinerary that fits your dates, budget and travel style.
       </p>
       <div style="display:flex;flex-wrap:wrap;gap:1rem;">
         <a href="#quote-form" class="btn-primary">Request a package quote</a>
-        <a href={business.whatsappUrl} class="btn-whatsapp" target="_blank" rel="noopener noreferrer">
-          <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.123.554 4.118 1.524 5.847L0 24l6.318-1.499A11.956 11.956 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 22c-1.903 0-3.68-.51-5.21-1.4l-.374-.221-3.752.89.938-3.658-.243-.381A9.945 9.945 0 012 12C2 6.477 6.477 2 12 2s10 4.477 10 10-4.477 10-10 10z"/></svg>
-          Chat on WhatsApp
-        </a>
+        <div style="display:flex;flex-direction:column;gap:0.25rem;">
+          <a href={waUrl} class="btn-whatsapp" target="_blank" rel="noopener noreferrer">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.123.554 4.118 1.524 5.847L0 24l6.318-1.499A11.956 11.956 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 22c-1.903 0-3.68-.51-5.21-1.4l-.374-.221-3.752.89.938-3.658-.243-.381A9.945 9.945 0 012 12C2 6.477 6.477 2 12 2s10 4.477 10 10-4.477 10-10 10z"/></svg>
+            Chat on WhatsApp
+          </a>
+          <p style="font-size:0.75rem;color:var(--color-muted);margin:0;line-height:1.3;">Avg. reply within 1 hour · Mon–Sat, 9am–9pm CT</p>
+        </div>
       </div>
     </div>
   </section>
@@ -100,8 +105,8 @@ const faqSchema = {
   <section class="section section-sand" aria-labelledby="pricing-heading">
     <div class="container" style="max-width:800px;">
       <h2 id="pricing-heading" style="margin-bottom:0.75rem;">Sample starting prices</h2>
-      <p style="font-size:0.875rem;color:var(--color-terracotta);background:#fdecea;border:1px solid #f5c6cb;border-radius:8px;padding:0.875rem 1rem;margin-bottom:2rem;line-height:1.6;">
-        <strong>Note:</strong> Prices are starting examples and must be confirmed based on dates, availability, route, hotel category, room type, traveler count and currency. Replace these with current validated offers before publishing.
+      <p style="font-size:0.875rem;color:var(--color-muted);margin-bottom:2rem;line-height:1.6;">
+        Prices are starting examples. Final pricing depends on dates, availability, route, hotel category, room type and traveler count.
       </p>
       <div style="overflow-x:auto;">
         <table style="width:100%;border-collapse:collapse;font-size:0.9rem;">

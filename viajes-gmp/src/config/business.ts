@@ -3,14 +3,14 @@
 
 export const business = {
   name: "Viajes GMP",
-  tagline: "Travel Mexico with local experts",
+  tagline: "Mexico-based travel planning for US, Canadian, and Mexican travelers.",
   url: "https://viajesgmp.com",
 
   // ─── Contact ───────────────────────────────────────────────────
-  phone: "[PHONE]",
-  email: "[EMAIL]",
-  whatsappUrl: "[WHATSAPP_URL]",
-  addressOrServiceArea: "[BUSINESS_ADDRESS_OR_SERVICE_AREA]",
+  phone: "+1 (805) 304-4306",
+  email: "jhern2325@gmail.com",
+  whatsappUrl: "https://wa.me/18053044306?text=Hi!%20I%27d%20like%20to%20plan%20a%20trip%20with%20Viajes%20GMP%20%E2%80%94%20can%20you%20help%3F",
+  addressOrServiceArea: "Mexico City, Mexico",
 
   // ─── Social ────────────────────────────────────────────────────
   googleReviewsUrl: "[GOOGLE_REVIEWS_URL]",

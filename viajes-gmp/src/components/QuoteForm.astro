@@ -6,8 +6,8 @@ interface Props {
 }
 const {
   formId = 'quote-form',
-  title = 'Request a Custom Mexico Trip Quote',
-  intro = 'Share a few details and our team will help you build the right trip.',
+  title = 'Tell us about your trip.',
+  intro = 'A real planner will reply within 1 hour during business hours.',
 } = Astro.props;
 ---
 
@@ -23,15 +23,10 @@ const {
         <input type="email" name="email" />
         <input type="text" name="phone-whatsapp" />
         <select name="preferred-language"></select>
-        <input type="text" name="country" />
-        <input type="text" name="departure-city" />
+        <select name="trip-type"></select>
         <input type="text" name="destination-trip-idea" />
         <input type="text" name="travel-dates-month" />
         <input type="number" name="number-of-adults" />
-        <input type="text" name="children-ages" />
-        <input type="text" name="budget-range" />
-        <select name="preferred-currency"></select>
-        <select name="trip-type"></select>
         <textarea name="message"></textarea>
       </form>
 
@@ -64,33 +59,36 @@ const {
             <input class="form-input" type="email" id="email" name="email" autocomplete="email" required aria-required="true" placeholder="you@example.com" />
           </div>
 
-          <!-- Phone / WhatsApp -->
+          <!-- WhatsApp number -->
           <div class="form-field">
-            <label class="form-label" for="phone-whatsapp">Phone or WhatsApp</label>
+            <label class="form-label" for="phone-whatsapp">WhatsApp number</label>
             <input class="form-input" type="tel" id="phone-whatsapp" name="phone-whatsapp" autocomplete="tel" placeholder="+1 555 000 0000" />
+            <p style="font-size:0.75rem;color:var(--color-muted);margin-top:0.25rem;">Optional — we use this for faster planning</p>
           </div>
 
           <!-- Preferred language -->
           <div class="form-field">
-            <label class="form-label" for="preferred-language">Preferred language</label>
-            <select class="form-select" id="preferred-language" name="preferred-language">
+            <label class="form-label" for="preferred-language">Preferred language<span class="form-required" aria-hidden="true">*</span></label>
+            <select class="form-select" id="preferred-language" name="preferred-language" required aria-required="true">
               <option value="">Select…</option>
               <option value="English">English</option>
               <option value="Spanish">Spanish</option>
-              <option value="Both">Both / Either</option>
+              <option value="Either">Either</option>
             </select>
           </div>
 
-          <!-- Country -->
-          <div class="form-field">
-            <label class="form-label" for="country">Country</label>
-            <input class="form-input" type="text" id="country" name="country" autocomplete="country-name" placeholder="United States" />
-          </div>
-
-          <!-- Departure city -->
-          <div class="form-field">
-            <label class="form-label" for="departure-city">Departure city</label>
-            <input class="form-input" type="text" id="departure-city" name="departure-city" placeholder="e.g. Dallas, Toronto" />
+          <!-- Trip type -->
+          <div class="form-field" style="grid-column:1/-1;">
+            <label class="form-label" for="trip-type">Trip type<span class="form-required" aria-hidden="true">*</span></label>
+            <select class="form-select" id="trip-type" name="trip-type" required aria-required="true">
+              <option value="">Select…</option>
+              <option value="Beach">Beach</option>
+              <option value="Family">Family</option>
+              <option value="Group">Group</option>
+              <option value="Wedding or Event">Wedding or Event</option>
+              <option value="Culture & Food">Culture &amp; Food</option>
+              <option value="Not sure yet">Not sure yet</option>
+            </select>
           </div>
 
           <!-- Destination / trip idea -->
@@ -105,50 +103,10 @@ const {
             <input class="form-input" type="text" id="travel-dates-month" name="travel-dates-month" required aria-required="true" placeholder="e.g. March 15–22 or April 2025" />
           </div>
 
-          <!-- Number of adults -->
+          <!-- Number of travelers -->
           <div class="form-field">
-            <label class="form-label" for="number-of-adults">Number of adults<span class="form-required" aria-hidden="true">*</span></label>
+            <label class="form-label" for="number-of-adults">Number of travelers<span class="form-required" aria-hidden="true">*</span></label>
             <input class="form-input" type="number" id="number-of-adults" name="number-of-adults" min="1" required aria-required="true" placeholder="2" />
-          </div>
-
-          <!-- Children -->
-          <div class="form-field">
-            <label class="form-label" for="children-ages">Number of children and ages</label>
-            <input class="form-input" type="text" id="children-ages" name="children-ages" placeholder="e.g. 2 children, ages 6 and 9" />
-          </div>
-
-          <!-- Budget range -->
-          <div class="form-field">
-            <label class="form-label" for="budget-range">Budget range</label>
-            <input class="form-input" type="text" id="budget-range" name="budget-range" placeholder="e.g. USD $3,000–5,000 total" />
-          </div>
-
-          <!-- Preferred currency -->
-          <div class="form-field">
-            <label class="form-label" for="preferred-currency">Preferred currency</label>
-            <select class="form-select" id="preferred-currency" name="preferred-currency">
-              <option value="">Select…</option>
-              <option value="USD">USD — US Dollar</option>
-              <option value="CAD">CAD — Canadian Dollar</option>
-              <option value="MXN">MXN — Mexican Peso</option>
-            </select>
-          </div>
-
-          <!-- Trip type -->
-          <div class="form-field" style="grid-column:1/-1;">
-            <label class="form-label" for="trip-type">Trip type</label>
-            <select class="form-select" id="trip-type" name="trip-type">
-              <option value="">Select…</option>
-              <option value="Beach">Beach</option>
-              <option value="Family">Family</option>
-              <option value="Group">Group</option>
-              <option value="Wedding">Wedding / Destination Wedding</option>
-              <option value="Culture">Culture &amp; Food</option>
-              <option value="Weekend">Weekend Getaway</option>
-              <option value="Luxury">Luxury</option>
-              <option value="Flights/Transfers">Flights / Transfers Only</option>
-              <option value="Other">Other</option>
-            </select>
           </div>
 
           <!-- Message -->
@@ -161,19 +119,16 @@ const {
         <!-- Submit -->
         <div style="display:flex;flex-direction:column;align-items:flex-start;gap:0.875rem;">
           <button type="submit" class="btn-primary" style="font-size:1rem;padding:0.875rem 2rem;">
-            Send My Trip Request
+            Send to a planner →
           </button>
-          <p style="font-size:0.8rem;color:var(--color-muted);max-width:480px;line-height:1.5;">
-            No pressure and no generic package. We will use your details to recommend realistic options.
-          </p>
         </div>
 
         <!-- Success / error messages -->
         <div id="form-success" role="alert" aria-live="polite" style="display:none;padding:1rem 1.25rem;background:#d4edda;border:1px solid #a8d5b5;border-radius:8px;color:#1a5c2e;">
-          <strong>Thank you.</strong> Your trip request has been sent. The Viajes GMP team will review your details and follow up with next steps.
+          <strong>Got it</strong> — Javier will reply within 1 hour. If it's urgent, <a href="https://wa.me/18053044306" style="color:#1a5c2e;font-weight:600;">message us on WhatsApp</a>.
         </div>
         <div id="form-error" role="alert" aria-live="polite" style="display:none;padding:1rem 1.25rem;background:#fdecea;border:1px solid #f5c6cb;border-radius:8px;color:#721c24;">
-          Something went wrong while sending your request. Please try again or <a href="#footer" style="color:inherit;font-weight:600;">message us on WhatsApp</a>.
+          Something went wrong while sending your request. Please try again or <a href="https://wa.me/18053044306" style="color:inherit;font-weight:600;">message us on WhatsApp</a>.
         </div>
       </form>
     </div>
@@ -233,7 +188,7 @@ const {
         if (error) error.style.display = 'block';
         if (success) success.style.display = 'none';
         submitBtn.disabled = false;
-        submitBtn.textContent = 'Send My Trip Request';
+        submitBtn.textContent = 'Send to a planner →';
       }
     });
 
