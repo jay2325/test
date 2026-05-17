@@ -1,0 +1,116 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import TrustBar from '../../components/TrustBar.astro';
+import QuoteForm from '../../components/QuoteForm.astro';
+import FAQ from '../../components/FAQ.astro';
+import CTABand from '../../components/CTABand.astro';
+import Breadcrumbs from '../../components/Breadcrumbs.astro';
+import { business } from '../../config/business';
+
+const groupTypes = [
+  { title: 'Corporate retreats', desc: 'Team travel for companies, incentive groups and off-site meetings.' },
+  { title: 'Friend groups', desc: 'Coordinated travel for birthdays, reunions, bachelorette and bachelor trips.' },
+  { title: 'School and university groups', desc: 'Cultural and educational travel for student groups and academic programs.' },
+  { title: 'Clubs and associations', desc: 'Coordinated travel for hobby groups, cultural organizations and clubs.' },
+  { title: 'Family reunions', desc: 'Multi-family travel with different arrival dates, room types and activity preferences.' },
+  { title: 'Sports groups', desc: 'Travel logistics for teams, tournaments, golf groups and sport-specific trips.' },
+];
+
+const services = [
+  'Group hotel options and room block coordination',
+  'Shared or private group transfers from the airport',
+  'Activity and excursion planning',
+  'Arrival and departure coordination',
+  'Rooming list and room assignment support',
+  'Optional group event and dinner planning',
+  'Bilingual communication support for international groups',
+];
+
+const faqs = [
+  { question: 'What is the minimum group size you work with?', answer: 'We work with groups of various sizes. Please share your group details and we will let you know how we can best support your trip.' },
+  { question: 'Can you coordinate different arrival times for group members?', answer: 'Yes. Many groups have members arriving from different cities or on different schedules. We can help coordinate multiple transfers and rooming assignments.' },
+  { question: 'Can you help plan activities for large groups?', answer: 'Yes. We can help coordinate group activities such as tours, dinners, outdoor experiences and local events, depending on the destination and group preferences.' },
+  { question: 'Do you work with corporate travel departments?', answer: 'Yes. We can work directly with corporate travel managers or event planners to coordinate incentive trips, retreats and team-building travel.' },
+];
+
+const faqSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  mainEntity: faqs.map((f) => ({ '@type': 'Question', name: f.question, acceptedAnswer: { '@type': 'Answer', text: f.answer } })),
+};
+---
+
+<Layout
+  title="Mexico Group Travel Planning | Viajes GMP"
+  description="Coordinate Mexico group travel for corporate teams, schools, clubs, celebrations and special events with Viajes GMP."
+  jsonLd={faqSchema}
+>
+  <Breadcrumbs crumbs={[{ label: 'Group Travel' }]} />
+
+  <section style="background:var(--color-ocean);padding-block:5rem 4rem;">
+    <div class="container" style="max-width:720px;">
+      <p style="font-size:0.8rem;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:rgba(255,255,255,0.6);margin-bottom:0.875rem;">Group Travel to Mexico</p>
+      <h1 style="margin-bottom:1.25rem;color:#fff;">Group Travel Coordination for Mexico Trips</h1>
+      <p style="font-size:1.05rem;color:rgba(255,255,255,0.82);line-height:1.7;margin-bottom:2rem;">
+        Flights, hotels, transfers, activities and destination logistics for corporate groups, friends, schools, clubs and celebrations.
+      </p>
+      <div style="display:flex;flex-wrap:wrap;gap:1rem;">
+        <a href="#quote-form" class="btn-primary">Plan group travel</a>
+        <a href={business.whatsappUrl} class="btn-whatsapp" target="_blank" rel="noopener noreferrer">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.123.554 4.118 1.524 5.847L0 24l6.318-1.499A11.956 11.956 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 22c-1.903 0-3.68-.51-5.21-1.4l-.374-.221-3.752.89.938-3.658-.243-.381A9.945 9.945 0 012 12C2 6.477 6.477 2 12 2s10 4.477 10 10-4.477 10-10 10z"/></svg>
+          Chat on WhatsApp
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <TrustBar />
+
+  <section class="section" style="background:var(--color-warm-white);">
+    <div class="container">
+      <div style="display:grid;grid-template-columns:1fr;gap:3rem;" class="group-grid">
+        <div>
+          <h2 style="margin-bottom:1.5rem;">Group types we support</h2>
+          <div style="display:flex;flex-direction:column;gap:0.875rem;">
+            {groupTypes.map((g) => (
+              <div style="padding:1.125rem 1.25rem;border:1.5px solid #e8e2d8;border-radius:10px;">
+                <strong style="display:block;font-size:0.9rem;color:var(--color-charcoal);margin-bottom:0.25rem;">{g.title}</strong>
+                <p style="font-size:0.85rem;color:var(--color-muted);line-height:1.5;">{g.desc}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+        <div>
+          <h2 style="margin-bottom:1.5rem;">What we coordinate</h2>
+          <ul style="list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:0.75rem;">
+            {services.map((s) => (
+              <li style="display:flex;gap:0.75rem;align-items:flex-start;font-size:0.925rem;color:var(--color-muted);">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--color-agave)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink:0;margin-top:2px;" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg>
+                {s}
+              </li>
+            ))}
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <QuoteForm
+    title="Request a Group Travel Quote"
+    intro="Tell us the group size, destination, dates and purpose of the trip. We will help organize the moving parts."
+  />
+
+  <FAQ items={faqs} title="Questions about Mexico group travel" />
+
+  <CTABand
+    headline="Make the logistics easier for everyone"
+    body="Tell us the group size, destination, dates and purpose of the trip. We will help organize the moving parts."
+    primaryLabel="Request a group travel quote"
+  />
+</Layout>
+
+<style>
+  @media (min-width: 768px) {
+    .group-grid { grid-template-columns: 1fr 1fr !important; }
+  }
+</style>

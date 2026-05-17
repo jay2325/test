@@ -1,0 +1,309 @@
+---
+import Layout from '../layouts/Layout.astro';
+import TrustBar from '../components/TrustBar.astro';
+import QuoteForm from '../components/QuoteForm.astro';
+import FAQ from '../components/FAQ.astro';
+import CTABand from '../components/CTABand.astro';
+import { business } from '../config/business';
+
+const packages = [
+  {
+    icon: `<svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>`,
+    title: 'Mexico Vacation Packages',
+    copy: 'Custom flight, hotel, transfer and activity planning for beach, culture, family, luxury and weekend trips.',
+    cta: 'Explore packages',
+    href: '/mexico-vacation-packages/',
+  },
+  {
+    icon: `<svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87"/><path d="M16 3.13a4 4 0 010 7.75"/></svg>`,
+    title: 'Family Vacations',
+    copy: 'Family-friendly hotels, airport transfers, tours and experiences planned around ages, room needs and pace.',
+    cta: 'Plan a family trip',
+    href: '/mexico-family-vacations/',
+  },
+  {
+    icon: `<svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>`,
+    title: 'Group Travel',
+    copy: 'Coordinated travel for corporate groups, friends, schools, celebrations and special events.',
+    cta: 'Organize a group trip',
+    href: '/mexico-group-travel/',
+  },
+  {
+    icon: `<svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 000-7.78z"/></svg>`,
+    title: 'Destination Weddings',
+    copy: 'Travel support for wedding guests, hotel blocks, transfers, pre-wedding activities and celebration weekends.',
+    cta: 'Start wedding travel planning',
+    href: '/destination-weddings-mexico/',
+  },
+  {
+    icon: `<svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 014 10 15.3 15.3 0 01-4 10 15.3 15.3 0 01-4-10 15.3 15.3 0 014-10z"/></svg>`,
+    title: 'Cultural Experiences',
+    copy: 'Oaxaca, Mexico City, San Miguel de Allende, Día de Muertos, food, art, heritage and local traditions.',
+    cta: 'Discover cultural trips',
+    href: '/oaxaca-cultural-tours-day-of-the-dead/',
+  },
+  {
+    icon: `<svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 17H3a2 2 0 01-2-2V5a2 2 0 012-2h11a2 2 0 012 2v3m-4 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z"/></svg>`,
+    title: 'Transfers and Flights',
+    copy: 'Flight search, airport transfers and ground transportation support for individuals, families and groups.',
+    cta: 'Request logistics support',
+    href: '/contact/',
+  },
+];
+
+const destinations = [
+  { name: 'Cancún & Riviera Maya', desc: 'Beaches, all-inclusive resorts, cenotes, family hotels, nightlife and Caribbean water.', href: '/cancun-riviera-maya-vacation-packages/', img: '/images/dest-cancun.jpg', alt: 'Turquoise Caribbean water and white sand beach in Cancún, Mexico' },
+  { name: 'Los Cabos', desc: 'Desert-meets-sea scenery, luxury resorts, golf, boating, wellness and celebration trips.', href: '/los-cabos-vacation-packages/', img: '/images/dest-loscabos.jpg', alt: 'Dramatic rocky arch over blue ocean in Los Cabos, Baja California' },
+  { name: 'Oaxaca', desc: 'Food, mezcal, artisan villages, markets, architecture and Día de Muertos experiences.', href: '/oaxaca-cultural-tours-day-of-the-dead/', img: '/images/dest-oaxaca.jpg', alt: 'Colorful colonial streets and market stalls in Oaxaca City, Mexico' },
+  { name: 'Mexico City', desc: 'Museums, food, art, history, neighborhoods, Teotihuacán and custom city itineraries.', href: '/contact/', img: '/images/dest-mexicocity.jpg', alt: 'Angel of Independence monument on Paseo de la Reforma, Mexico City' },
+  { name: 'San Miguel de Allende', desc: 'Romance, weddings, colonial charm, art, boutique hotels and cultural celebrations.', href: '/contact/', img: '/images/dest-sanmiguel.jpg', alt: 'Pink facade of La Parroquia church in San Miguel de Allende at sunset' },
+  { name: 'Valle de Guadalupe', desc: 'Wine, food, boutique stays and Baja weekend escapes.', href: '/contact/', img: '/images/dest-valle.jpg', alt: 'Vineyard rows at golden hour in Valle de Guadalupe, Baja California' },
+];
+
+const steps = [
+  { n: '01', title: 'Tell us your trip idea', body: 'Share your destination, travel dates, number of travelers, departure city, budget and preferred style.' },
+  { n: '02', title: 'We compare options', body: 'Our team reviews flights, hotels, transfers and experiences that match your needs.' },
+  { n: '03', title: 'You receive a custom quote', body: 'We send a clear plan with pricing, inclusions, optional upgrades and next steps.' },
+  { n: '04', title: 'Travel with support', body: 'We help coordinate the details before and during your trip.' },
+];
+
+const whyUs = [
+  { title: 'Experience', body: 'More than 20 years helping travelers plan trips.' },
+  { title: 'Local knowledge', body: 'Mexico-based support for hotels, transfers, activities and destination details.' },
+  { title: 'Flexible planning', body: 'Choose a sample package or request a fully custom itinerary.' },
+  { title: 'Bilingual communication', body: 'English and Spanish support for travelers, families and groups.' },
+  { title: 'One planning partner', body: 'Flights, lodging, transfers, activities and special events coordinated in one place.' },
+];
+
+const faqs = [
+  {
+    question: 'Can you help travelers from the United States and Canada?',
+    answer: 'Yes. Viajes GMP can help US and Canadian travelers plan Mexico trips with bilingual communication and local coordination.',
+  },
+  {
+    question: 'Do you provide prices in USD or CAD?',
+    answer: 'We can provide quote options in your preferred currency when possible. Final pricing depends on dates, availability, traveler count, hotel category and supplier terms.',
+  },
+  {
+    question: 'Can you book flights, hotels and transfers together?',
+    answer: 'Yes. We can help coordinate flights, hotels, transfers, tours and activities depending on your trip needs.',
+  },
+  {
+    question: 'Is every trip custom?',
+    answer: 'Most trips begin with a sample package or destination idea, then we customize around your dates, budget, group and preferences.',
+  },
+  {
+    question: 'How fast will you respond?',
+    answer: '[Replace this answer with the actual response-time promise before publishing.]',
+  },
+];
+
+const faqSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  mainEntity: faqs.map((f) => ({
+    '@type': 'Question',
+    name: f.question,
+    acceptedAnswer: { '@type': 'Answer', text: f.answer },
+  })),
+};
+
+const travelAgencySchema = {
+  '@context': 'https://schema.org',
+  '@type': 'TravelAgency',
+  name: business.name,
+  url: business.url,
+  telephone: business.phone,
+  address: { '@type': 'PostalAddress', addressCountry: 'MX', description: business.addressOrServiceArea },
+  sameAs: [
+    business.instagramUrl,
+    business.facebookUrl,
+    business.tiktokUrl,
+    business.youtubeUrl,
+  ].filter((u) => !u.startsWith('[')),
+  priceRange: 'USD $$',
+  areaServed: ['Mexico', 'United States', 'Canada'],
+  description: 'Mexico-based travel agency specializing in custom vacations, group trips, destination weddings, flights, hotels, transfers and cultural experiences for US and Canadian travelers.',
+};
+---
+
+<Layout
+  title="Mexico Travel Agency for Custom Vacations | Viajes GMP"
+  description="Plan Mexico vacations, family trips, group travel, destination weddings, flights, hotels, transfers and cultural experiences with Viajes GMP, a Mexico-based agency offering bilingual support for US and Canadian travelers."
+  ogTitle="Plan Your Mexico Trip With Local Experts"
+  ogDescription="Custom Mexico vacations, group trips, weddings, flights, hotels, transfers and cultural experiences planned by a Mexico-based bilingual travel team."
+  jsonLd={[travelAgencySchema, faqSchema]}
+>
+
+  <!-- ── Hero ────────────────────────────────────────────────────── -->
+  <section style="background:var(--color-sand);padding-block:5rem 4rem;position:relative;overflow:hidden;">
+    <div aria-hidden="true" style="position:absolute;right:-120px;top:-80px;width:500px;height:500px;border-radius:50%;background:var(--color-ocean);opacity:0.05;pointer-events:none;"></div>
+    <div class="container" style="position:relative;">
+      <div style="max-width:680px;">
+        <p style="font-size:0.85rem;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:var(--color-terracotta);margin-bottom:1rem;">Mexico travel planning for US and Canadian travelers</p>
+        <h1 style="margin-bottom:1.25rem;">Plan Your Mexico Trip With Local Experts</h1>
+        <p style="font-size:1.125rem;color:var(--color-muted);line-height:1.7;margin-bottom:2rem;max-width:580px;">
+          Viajes GMP designs custom vacations, family trips, group travel, destination weddings, flights, hotels, transfers and cultural experiences across Mexico, with bilingual planning support from a Mexico-based team.
+        </p>
+        <div style="display:flex;flex-wrap:wrap;gap:1rem;margin-bottom:1.5rem;">
+          <a href="#quote-form" class="btn-primary" style="font-size:1rem;padding:0.875rem 1.75rem;">Request a Custom Quote</a>
+          <a href={business.whatsappUrl} class="btn-whatsapp" target="_blank" rel="noopener noreferrer" style="font-size:1rem;padding:0.875rem 1.75rem;">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.123.554 4.118 1.524 5.847L0 24l6.318-1.499A11.956 11.956 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 22c-1.903 0-3.68-.51-5.21-1.4l-.374-.221-3.752.89.938-3.658-.243-.381A9.945 9.945 0 012 12C2 6.477 6.477 2 12 2s10 4.477 10 10-4.477 10-10 10z"/></svg>
+            Chat on WhatsApp
+          </a>
+        </div>
+        <p style="font-size:0.85rem;color:var(--color-muted);line-height:1.5;">
+          Tell us where you want to go, when you want to travel, and what kind of experience you want. We will help turn it into a clear trip plan.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── Trust bar ───────────────────────────────────────────────── -->
+  <TrustBar />
+
+  <!-- ── Problem / Solution ──────────────────────────────────────── -->
+  <section class="section section-sand">
+    <div class="container" style="max-width:780px;text-align:center;">
+      <h2 style="margin-bottom:1.25rem;">Mexico is easy to love. Planning it well takes local help.</h2>
+      <p style="font-size:1.05rem;color:var(--color-muted);line-height:1.8;">
+        Mexico has beach resorts, food cities, colonial towns, cultural festivals, wedding destinations, family-friendly hotels and once-in-a-lifetime experiences. The challenge is choosing the right destination, safe transfers, realistic timing, trusted suppliers and a plan that fits your budget. Viajes GMP helps you compare options and coordinate the pieces, so your trip feels personal, clear and supported from the first quote to the day you return.
+      </p>
+    </div>
+  </section>
+
+  <!-- ── Package cards ───────────────────────────────────────────── -->
+  <section class="section" style="background:var(--color-warm-white);" aria-labelledby="packages-heading">
+    <div class="container">
+      <h2 id="packages-heading" style="text-align:center;margin-bottom:0.75rem;">What we help you plan</h2>
+      <p style="text-align:center;color:var(--color-muted);margin-bottom:3rem;max-width:520px;margin-inline:auto;">From a beach week to a cultural deep-dive, we coordinate the pieces so you can focus on the trip.</p>
+      <div style="display:grid;grid-template-columns:1fr;gap:1.25rem;" class="pkg-grid">
+        {packages.map((pkg) => (
+          <a href={pkg.href} class="card" style="padding:1.75rem;text-decoration:none;display:flex;flex-direction:column;gap:1rem;">
+            <span style="width:52px;height:52px;border-radius:12px;background:var(--color-sand);display:flex;align-items:center;justify-content:center;color:var(--color-ocean);flex-shrink:0;" set:html={pkg.icon}></span>
+            <div>
+              <h3 style="font-size:1.1rem;margin-bottom:0.5rem;">{pkg.title}</h3>
+              <p style="font-size:0.9rem;color:var(--color-muted);line-height:1.6;">{pkg.copy}</p>
+            </div>
+            <span style="font-size:0.875rem;font-weight:600;color:var(--color-terracotta);margin-top:auto;display:inline-flex;align-items:center;gap:0.25rem;">
+              {pkg.cta}
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="9 18 15 12 9 6"/></svg>
+            </span>
+          </a>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- ── Destinations ────────────────────────────────────────────── -->
+  <section class="section section-sand" id="destinations" aria-labelledby="dest-heading">
+    <div class="container">
+      <h2 id="dest-heading" style="text-align:center;margin-bottom:0.75rem;">Popular Mexico destinations we can help you plan</h2>
+      <p style="text-align:center;color:var(--color-muted);margin-bottom:3rem;max-width:540px;margin-inline:auto;">Start with a destination, or tell us your travel style and we will recommend the best fit.</p>
+      <div style="display:grid;grid-template-columns:1fr;gap:1.25rem;" class="dest-grid">
+        {destinations.map((dest) => (
+          <a href={dest.href} style="text-decoration:none;border-radius:12px;overflow:hidden;background:var(--color-warm-white);border:1px solid #e8e2d8;display:flex;flex-direction:column;transition:box-shadow 0.2s,transform 0.2s;" class="dest-card">
+            <div style="aspect-ratio:16/9;background:linear-gradient(135deg,#0A4F5A 0%,#5E7D5A 100%);display:flex;align-items:center;justify-content:center;position:relative;overflow:hidden;">
+              <img
+                src={dest.img}
+                alt={dest.alt}
+                width="600"
+                height="338"
+                loading="lazy"
+                decoding="async"
+                style="width:100%;height:100%;object-fit:cover;position:absolute;inset:0;"
+                onerror="this.style.display='none'"
+              />
+              <span aria-hidden="true" style="font-family:'Fraunces',Georgia,serif;font-size:1.5rem;font-weight:700;color:rgba(255,255,255,0.3);z-index:1;position:relative;">{dest.name.charAt(0)}</span>
+            </div>
+            <div style="padding:1.25rem;">
+              <h3 style="font-size:1.05rem;margin-bottom:0.5rem;">{dest.name}</h3>
+              <p style="font-size:0.875rem;color:var(--color-muted);line-height:1.6;">{dest.desc}</p>
+              <span aria-hidden="true" style="display:inline-flex;align-items:center;gap:0.25rem;margin-top:0.875rem;font-size:0.8rem;font-weight:600;color:var(--color-ocean);">
+                Plan this trip
+                <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+              </span>
+            </div>
+          </a>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- ── How it works ────────────────────────────────────────────── -->
+  <section class="section" style="background:var(--color-warm-white);" aria-labelledby="how-heading">
+    <div class="container">
+      <h2 id="how-heading" style="text-align:center;margin-bottom:3rem;">How it works</h2>
+      <div style="display:grid;grid-template-columns:1fr;gap:2rem;max-width:880px;margin-inline:auto;" class="steps-grid">
+        {steps.map((step) => (
+          <div style="display:flex;gap:1.25rem;align-items:flex-start;">
+            <span style="flex-shrink:0;width:48px;height:48px;border-radius:50%;background:var(--color-sand);border:2px solid var(--color-ocean);display:flex;align-items:center;justify-content:center;font-family:'Fraunces',Georgia,serif;font-size:1rem;font-weight:700;color:var(--color-ocean);">{step.n}</span>
+            <div>
+              <h3 style="font-size:1.1rem;margin-bottom:0.5rem;">{step.title}</h3>
+              <p style="font-size:0.9rem;color:var(--color-muted);line-height:1.6;">{step.body}</p>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- ── Why Viajes GMP ──────────────────────────────────────────── -->
+  <section class="section section-sand" aria-labelledby="why-heading">
+    <div class="container">
+      <h2 id="why-heading" style="text-align:center;margin-bottom:0.75rem;">Local planning, clear options and human support</h2>
+      <p style="text-align:center;color:var(--color-muted);margin-bottom:3rem;max-width:500px;margin-inline:auto;">What makes working with Viajes GMP different from booking on your own.</p>
+      <div style="display:grid;grid-template-columns:1fr;gap:1rem;max-width:900px;margin-inline:auto;" class="why-grid">
+        {whyUs.map((item) => (
+          <div style="background:var(--color-warm-white);border:1px solid #e8e2d8;border-radius:10px;padding:1.5rem;display:flex;gap:0.875rem;align-items:flex-start;">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--color-agave)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink:0;margin-top:2px;" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg>
+            <div>
+              <strong style="display:block;font-size:0.95rem;margin-bottom:0.25rem;">{item.title}</strong>
+              <p style="font-size:0.875rem;color:var(--color-muted);line-height:1.6;">{item.body}</p>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- ── Testimonials placeholder ───────────────────────────────── -->
+  <section class="section-sm" style="background:var(--color-warm-white);border-top:1px solid #e8e2d8;border-bottom:1px solid #e8e2d8;">
+    <div class="container" style="text-align:center;max-width:640px;">
+      <p style="font-size:0.8rem;font-weight:700;text-transform:uppercase;letter-spacing:0.08em;color:var(--color-terracotta);margin-bottom:0.75rem;">Traveler Reviews</p>
+      <p style="font-size:1rem;color:var(--color-muted);line-height:1.6;margin-bottom:1rem;">
+        Real traveler reviews will be added here before launch. Connect your Google Business profile to display verified reviews.
+      </p>
+      {business.googleReviewsUrl !== '[GOOGLE_REVIEWS_URL]' && (
+        <a href={business.googleReviewsUrl} class="btn-secondary" target="_blank" rel="noopener noreferrer" style="font-size:0.875rem;">Read Google Reviews</a>
+      )}
+    </div>
+  </section>
+
+  <!-- ── Quote form ──────────────────────────────────────────────── -->
+  <QuoteForm />
+
+  <!-- ── FAQ ────────────────────────────────────────────────────── -->
+  <FAQ items={faqs} title="Common questions about planning a Mexico trip" />
+
+  <!-- ── Final CTA ───────────────────────────────────────────────── -->
+  <CTABand />
+
+</Layout>
+
+<style>
+  @media (min-width: 640px) {
+    .pkg-grid { grid-template-columns: 1fr 1fr !important; }
+    .dest-grid { grid-template-columns: 1fr 1fr !important; }
+    .steps-grid { grid-template-columns: 1fr 1fr !important; }
+    .why-grid { grid-template-columns: 1fr 1fr !important; }
+  }
+  @media (min-width: 1024px) {
+    .pkg-grid { grid-template-columns: repeat(3, 1fr) !important; }
+    .dest-grid { grid-template-columns: repeat(3, 1fr) !important; }
+  }
+  .dest-card:hover {
+    box-shadow: 0 8px 30px rgba(10,79,90,0.1);
+    transform: translateY(-2px);
+  }
+</style>

@@ -1,0 +1,70 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import Breadcrumbs from '../../components/Breadcrumbs.astro';
+import { business } from '../../config/business';
+---
+
+<Layout
+  title="Privacy Policy | Viajes GMP"
+  description="Privacy policy for Viajes GMP. Learn how we handle information collected through quote requests and website use."
+  noindex={true}
+>
+  <Breadcrumbs crumbs={[{ label: 'Privacy Policy' }]} />
+
+  <section style="background:var(--color-sand);padding-block:3rem 2rem;">
+    <div class="container" style="max-width:720px;">
+      <div style="background:#fff3cd;border:1px solid #ffc107;border-radius:8px;padding:1rem 1.25rem;margin-bottom:1.5rem;">
+        <strong style="font-size:0.875rem;">⚠️ Review before publishing:</strong>
+        <p style="font-size:0.85rem;color:#856404;margin-top:0.25rem;line-height:1.5;">This is a placeholder privacy policy. Have a qualified legal professional review and customize it before publishing the site.</p>
+      </div>
+      <h1 style="margin-bottom:0.5rem;">Privacy Policy</h1>
+      <p style="font-size:0.875rem;color:var(--color-muted);">Last updated: [DATE — replace before publishing]</p>
+    </div>
+  </section>
+
+  <section class="section" style="background:var(--color-warm-white);">
+    <div class="container" style="max-width:720px;">
+      <div style="display:flex;flex-direction:column;gap:2.5rem;font-size:0.95rem;color:var(--color-muted);line-height:1.8;">
+
+        <div>
+          <h2 style="font-size:1.25rem;margin-bottom:0.875rem;">1. Information we collect</h2>
+          <p>When you submit a trip quote request through this website, we collect the information you provide including your name, email address, phone number, travel dates, destination preferences and other details you choose to share. We may also collect basic usage data through analytics tools.</p>
+        </div>
+
+        <div>
+          <h2 style="font-size:1.25rem;margin-bottom:0.875rem;">2. How we use your information</h2>
+          <p>Information you submit through quote request forms is used to prepare and send you a travel quote. We may follow up by email, phone or WhatsApp based on the contact details you provided. We do not sell or share your personal information with third parties for marketing purposes without your consent.</p>
+        </div>
+
+        <div>
+          <h2 style="font-size:1.25rem;margin-bottom:0.875rem;">3. Third-party services</h2>
+          <p>This site may use third-party services including form submission providers, analytics platforms and content delivery networks. These services have their own privacy policies. [List specific services used and link to their policies before publishing.]</p>
+        </div>
+
+        <div>
+          <h2 style="font-size:1.25rem;margin-bottom:0.875rem;">4. Cookies and analytics</h2>
+          <p>[Describe your analytics setup, any cookies used, and whether opt-out is available. If using Google Analytics or similar tools, disclose this here and link to relevant opt-out options. Have a legal professional review this section.]</p>
+        </div>
+
+        <div>
+          <h2 style="font-size:1.25rem;margin-bottom:0.875rem;">5. Data retention</h2>
+          <p>[Describe how long you retain submitted inquiry data and when it is deleted. This section should reflect your actual practice.]</p>
+        </div>
+
+        <div>
+          <h2 style="font-size:1.25rem;margin-bottom:0.875rem;">6. Your rights</h2>
+          <p>[Describe user rights relevant to your jurisdiction, including the right to access, correct or delete personal data. Requirements vary by country and applicable law. Have a legal professional determine what applies.]</p>
+        </div>
+
+        <div>
+          <h2 style="font-size:1.25rem;margin-bottom:0.875rem;">7. Contact</h2>
+          <p>
+            For privacy-related questions, contact us at:
+            <a href={`mailto:${business.email}`} style="color:var(--color-ocean);">{business.email}</a>
+          </p>
+        </div>
+
+      </div>
+    </div>
+  </section>
+</Layout>

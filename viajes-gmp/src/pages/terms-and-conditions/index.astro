@@ -1,0 +1,75 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import Breadcrumbs from '../../components/Breadcrumbs.astro';
+import { business } from '../../config/business';
+---
+
+<Layout
+  title="Terms and Conditions | Viajes GMP"
+  description="Terms and conditions for Viajes GMP travel planning services."
+  noindex={true}
+>
+  <Breadcrumbs crumbs={[{ label: 'Terms and Conditions' }]} />
+
+  <section style="background:var(--color-sand);padding-block:3rem 2rem;">
+    <div class="container" style="max-width:720px;">
+      <div style="background:#fff3cd;border:1px solid #ffc107;border-radius:8px;padding:1rem 1.25rem;margin-bottom:1.5rem;">
+        <strong style="font-size:0.875rem;">⚠️ Review before publishing:</strong>
+        <p style="font-size:0.85rem;color:#856404;margin-top:0.25rem;line-height:1.5;">This is a placeholder terms and conditions page. Have a qualified legal professional review and customize it before publishing the site.</p>
+      </div>
+      <h1 style="margin-bottom:0.5rem;">Terms and Conditions</h1>
+      <p style="font-size:0.875rem;color:var(--color-muted);">Last updated: [DATE — replace before publishing]</p>
+    </div>
+  </section>
+
+  <section class="section" style="background:var(--color-warm-white);">
+    <div class="container" style="max-width:720px;">
+      <div style="display:flex;flex-direction:column;gap:2.5rem;font-size:0.95rem;color:var(--color-muted);line-height:1.8;">
+
+        <div>
+          <h2 style="font-size:1.25rem;margin-bottom:0.875rem;">1. Scope of services</h2>
+          <p>Viajes GMP provides travel planning and coordination services including quote preparation, hotel research, flight coordination, transfer logistics, tour planning and itinerary support. A confirmed booking or quote does not constitute a service contract until formally agreed upon in writing. [Revise this section based on your actual service model.]</p>
+        </div>
+
+        <div>
+          <h2 style="font-size:1.25rem;margin-bottom:0.875rem;">2. Quote terms</h2>
+          <p>Quotes provided through this website or by email are estimates based on available information at the time of inquiry. Final pricing depends on availability, dates, hotel category, room type, traveler count, currency and supplier terms at the time of booking. Prices shown as "starting from" are examples only and are not guaranteed until confirmed. [Expand this section with your actual quote and confirmation process.]</p>
+        </div>
+
+        <div>
+          <h2 style="font-size:1.25rem;margin-bottom:0.875rem;">3. Payment terms</h2>
+          <p>[Describe your payment process, accepted payment methods, deposit requirements, and final payment timeline. This section must reflect your actual business practice. Payment methods: {business.paymentMethods}]</p>
+        </div>
+
+        <div>
+          <h2 style="font-size:1.25rem;margin-bottom:0.875rem;">4. Cancellation and modifications</h2>
+          <p>[Describe your cancellation policy, modification fees, refund terms and any supplier-specific cancellation terms that may apply. This section must be reviewed by a legal professional and should match your actual practice. See also: {business.cancellationPolicyUrl}]</p>
+        </div>
+
+        <div>
+          <h2 style="font-size:1.25rem;margin-bottom:0.875rem;">5. Liability limitations</h2>
+          <p>[This section requires legal review specific to your jurisdiction. Travel agencies typically disclaim liability for airline delays, hotel issues, natural events, acts of government and other circumstances beyond their control. Have a qualified attorney draft this section.]</p>
+        </div>
+
+        <div>
+          <h2 style="font-size:1.25rem;margin-bottom:0.875rem;">6. Travel documents and insurance</h2>
+          <p>Travelers are responsible for ensuring they hold valid passports, visas and any required travel documents for their destination. Viajes GMP strongly recommends purchasing travel insurance to cover cancellations, medical emergencies and disruptions. [Expand as needed.]</p>
+        </div>
+
+        <div>
+          <h2 style="font-size:1.25rem;margin-bottom:0.875rem;">7. Governing law</h2>
+          <p>[Specify the jurisdiction and governing law for any disputes. This section requires legal input based on where you are incorporated and where you serve clients.]</p>
+        </div>
+
+        <div>
+          <h2 style="font-size:1.25rem;margin-bottom:0.875rem;">8. Contact</h2>
+          <p>
+            For questions about these terms, contact us at:
+            <a href={`mailto:${business.email}`} style="color:var(--color-ocean);">{business.email}</a>
+          </p>
+        </div>
+
+      </div>
+    </div>
+  </section>
+</Layout>

@@ -1,0 +1,247 @@
+---
+interface Props {
+  formId?: string;
+  title?: string;
+  intro?: string;
+}
+const {
+  formId = 'quote-form',
+  title = 'Request a Custom Mexico Trip Quote',
+  intro = 'Share a few details and our team will help you build the right trip.',
+} = Astro.props;
+---
+
+<section id={formId} style="background:var(--color-sand);padding-block:5rem;">
+  <div class="container">
+    <div style="max-width:780px;margin-inline:auto;">
+      <h2 style="text-align:center;margin-bottom:0.75rem;">{title}</h2>
+      <p style="text-align:center;color:var(--color-muted);margin-bottom:2.5rem;max-width:560px;margin-inline:auto;">{intro}</p>
+
+      <!-- Netlify form detection: hidden version for Netlify bots -->
+      <form name="trip-quote-request" netlify netlify-honeypot="bot-field" hidden>
+        <input type="text" name="full-name" />
+        <input type="email" name="email" />
+        <input type="text" name="phone-whatsapp" />
+        <select name="preferred-language"></select>
+        <input type="text" name="country" />
+        <input type="text" name="departure-city" />
+        <input type="text" name="destination-trip-idea" />
+        <input type="text" name="travel-dates-month" />
+        <input type="number" name="number-of-adults" />
+        <input type="text" name="children-ages" />
+        <input type="text" name="budget-range" />
+        <select name="preferred-currency"></select>
+        <select name="trip-type"></select>
+        <textarea name="message"></textarea>
+      </form>
+
+      <form
+        id="quote-request-form"
+        name="trip-quote-request"
+        method="POST"
+        data-netlify="true"
+        netlify-honeypot="bot-field"
+        novalidate
+        style="display:grid;gap:1.25rem;"
+      >
+        <input type="hidden" name="form-name" value="trip-quote-request" />
+        <!-- Honeypot -->
+        <p style="display:none;">
+          <label>Don't fill this out if you're human: <input name="bot-field" /></label>
+        </p>
+
+        <div style="display:grid;grid-template-columns:1fr;gap:1.25rem;" class="form-grid-2">
+
+          <!-- Full name -->
+          <div class="form-field">
+            <label class="form-label" for="full-name">Full name<span class="form-required" aria-hidden="true">*</span></label>
+            <input class="form-input" type="text" id="full-name" name="full-name" autocomplete="name" required aria-required="true" placeholder="Your full name" />
+          </div>
+
+          <!-- Email -->
+          <div class="form-field">
+            <label class="form-label" for="email">Email<span class="form-required" aria-hidden="true">*</span></label>
+            <input class="form-input" type="email" id="email" name="email" autocomplete="email" required aria-required="true" placeholder="you@example.com" />
+          </div>
+
+          <!-- Phone / WhatsApp -->
+          <div class="form-field">
+            <label class="form-label" for="phone-whatsapp">Phone or WhatsApp</label>
+            <input class="form-input" type="tel" id="phone-whatsapp" name="phone-whatsapp" autocomplete="tel" placeholder="+1 555 000 0000" />
+          </div>
+
+          <!-- Preferred language -->
+          <div class="form-field">
+            <label class="form-label" for="preferred-language">Preferred language</label>
+            <select class="form-select" id="preferred-language" name="preferred-language">
+              <option value="">Select…</option>
+              <option value="English">English</option>
+              <option value="Spanish">Spanish</option>
+              <option value="Both">Both / Either</option>
+            </select>
+          </div>
+
+          <!-- Country -->
+          <div class="form-field">
+            <label class="form-label" for="country">Country</label>
+            <input class="form-input" type="text" id="country" name="country" autocomplete="country-name" placeholder="United States" />
+          </div>
+
+          <!-- Departure city -->
+          <div class="form-field">
+            <label class="form-label" for="departure-city">Departure city</label>
+            <input class="form-input" type="text" id="departure-city" name="departure-city" placeholder="e.g. Dallas, Toronto" />
+          </div>
+
+          <!-- Destination / trip idea -->
+          <div class="form-field" style="grid-column:1/-1;">
+            <label class="form-label" for="destination-trip-idea">Destination or trip idea<span class="form-required" aria-hidden="true">*</span></label>
+            <input class="form-input" type="text" id="destination-trip-idea" name="destination-trip-idea" required aria-required="true" placeholder="e.g. Cancún beach week, Oaxaca cultural trip, Los Cabos wedding" />
+          </div>
+
+          <!-- Travel dates -->
+          <div class="form-field">
+            <label class="form-label" for="travel-dates-month">Travel dates or month<span class="form-required" aria-hidden="true">*</span></label>
+            <input class="form-input" type="text" id="travel-dates-month" name="travel-dates-month" required aria-required="true" placeholder="e.g. March 15–22 or April 2025" />
+          </div>
+
+          <!-- Number of adults -->
+          <div class="form-field">
+            <label class="form-label" for="number-of-adults">Number of adults<span class="form-required" aria-hidden="true">*</span></label>
+            <input class="form-input" type="number" id="number-of-adults" name="number-of-adults" min="1" required aria-required="true" placeholder="2" />
+          </div>
+
+          <!-- Children -->
+          <div class="form-field">
+            <label class="form-label" for="children-ages">Number of children and ages</label>
+            <input class="form-input" type="text" id="children-ages" name="children-ages" placeholder="e.g. 2 children, ages 6 and 9" />
+          </div>
+
+          <!-- Budget range -->
+          <div class="form-field">
+            <label class="form-label" for="budget-range">Budget range</label>
+            <input class="form-input" type="text" id="budget-range" name="budget-range" placeholder="e.g. USD $3,000–5,000 total" />
+          </div>
+
+          <!-- Preferred currency -->
+          <div class="form-field">
+            <label class="form-label" for="preferred-currency">Preferred currency</label>
+            <select class="form-select" id="preferred-currency" name="preferred-currency">
+              <option value="">Select…</option>
+              <option value="USD">USD — US Dollar</option>
+              <option value="CAD">CAD — Canadian Dollar</option>
+              <option value="MXN">MXN — Mexican Peso</option>
+            </select>
+          </div>
+
+          <!-- Trip type -->
+          <div class="form-field" style="grid-column:1/-1;">
+            <label class="form-label" for="trip-type">Trip type</label>
+            <select class="form-select" id="trip-type" name="trip-type">
+              <option value="">Select…</option>
+              <option value="Beach">Beach</option>
+              <option value="Family">Family</option>
+              <option value="Group">Group</option>
+              <option value="Wedding">Wedding / Destination Wedding</option>
+              <option value="Culture">Culture &amp; Food</option>
+              <option value="Weekend">Weekend Getaway</option>
+              <option value="Luxury">Luxury</option>
+              <option value="Flights/Transfers">Flights / Transfers Only</option>
+              <option value="Other">Other</option>
+            </select>
+          </div>
+
+          <!-- Message -->
+          <div class="form-field" style="grid-column:1/-1;">
+            <label class="form-label" for="message">Message or additional details</label>
+            <textarea class="form-textarea" id="message" name="message" rows="4" placeholder="Tell us more about your trip idea, preferences, or questions…"></textarea>
+          </div>
+        </div>
+
+        <!-- Submit -->
+        <div style="display:flex;flex-direction:column;align-items:flex-start;gap:0.875rem;">
+          <button type="submit" class="btn-primary" style="font-size:1rem;padding:0.875rem 2rem;">
+            Send My Trip Request
+          </button>
+          <p style="font-size:0.8rem;color:var(--color-muted);max-width:480px;line-height:1.5;">
+            No pressure and no generic package. We will use your details to recommend realistic options.
+          </p>
+        </div>
+
+        <!-- Success / error messages -->
+        <div id="form-success" role="alert" aria-live="polite" style="display:none;padding:1rem 1.25rem;background:#d4edda;border:1px solid #a8d5b5;border-radius:8px;color:#1a5c2e;">
+          <strong>Thank you.</strong> Your trip request has been sent. The Viajes GMP team will review your details and follow up with next steps.
+        </div>
+        <div id="form-error" role="alert" aria-live="polite" style="display:none;padding:1rem 1.25rem;background:#fdecea;border:1px solid #f5c6cb;border-radius:8px;color:#721c24;">
+          Something went wrong while sending your request. Please try again or <a href="#footer" style="color:inherit;font-weight:600;">message us on WhatsApp</a>.
+        </div>
+      </form>
+    </div>
+  </div>
+</section>
+
+<style>
+  @media (min-width: 640px) {
+    .form-grid-2 { grid-template-columns: 1fr 1fr !important; }
+  }
+</style>
+
+<script>
+  const form = document.getElementById('quote-request-form') as HTMLFormElement | null;
+  const success = document.getElementById('form-success');
+  const error = document.getElementById('form-error');
+
+  if (form) {
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+
+      // Basic client-side validation
+      const required = form.querySelectorAll('[required]');
+      let valid = true;
+      required.forEach((field) => {
+        const el = field as HTMLInputElement;
+        if (!el.value.trim()) {
+          el.style.borderColor = 'var(--color-terracotta)';
+          valid = false;
+        } else {
+          el.style.borderColor = '';
+        }
+      });
+      if (!valid) return;
+
+      const submitBtn = form.querySelector('button[type="submit"]') as HTMLButtonElement;
+      submitBtn.disabled = true;
+      submitBtn.textContent = 'Sending…';
+
+      try {
+        const data = new URLSearchParams(new FormData(form) as unknown as Record<string, string>);
+        const res = await fetch('/', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+          body: data.toString(),
+        });
+
+        if (res.ok) {
+          form.reset();
+          if (success) success.style.display = 'block';
+          if (error) error.style.display = 'none';
+          success?.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        } else {
+          throw new Error('Network response was not ok');
+        }
+      } catch {
+        if (error) error.style.display = 'block';
+        if (success) success.style.display = 'none';
+        submitBtn.disabled = false;
+        submitBtn.textContent = 'Send My Trip Request';
+      }
+    });
+
+    // Clear field error on input
+    form.querySelectorAll('.form-input, .form-select, .form-textarea').forEach((field) => {
+      field.addEventListener('input', () => {
+        (field as HTMLElement).style.borderColor = '';
+      });
+    });
+  }
+</script>
