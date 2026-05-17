@@ -1,0 +1,119 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import TrustBar from '../../components/TrustBar.astro';
+import QuoteForm from '../../components/QuoteForm.astro';
+import FAQ from '../../components/FAQ.astro';
+import CTABand from '../../components/CTABand.astro';
+import Breadcrumbs from '../../components/Breadcrumbs.astro';
+import { business } from '../../config/business';
+
+const planning = [
+  'Family-friendly destination recommendations',
+  'Hotel and room setup guidance (connecting rooms, suites, cribs)',
+  'Airport transfer coordination for families with luggage',
+  'Activities matched to ages and mobility needs',
+  'Flexible pacing with rest time built in',
+  'Optional flight and baggage logistics',
+  'Support for larger multigenerational groups',
+  'Special needs or accessibility guidance',
+];
+
+const destinations = [
+  { name: 'Cancún & Riviera Maya', desc: 'Large all-inclusive resorts with kids clubs, shallow pools, beaches, and easy access from US and Canadian cities.', href: '/cancun-riviera-maya-vacation-packages/' },
+  { name: 'Los Cabos', desc: 'Several family-friendly resort options with calm pools, beaches and activities for different ages.', href: '/los-cabos-vacation-packages/' },
+  { name: 'Puerto Vallarta', desc: 'Colonial charm, beach access, water parks, whale watching and family-oriented hotels.', href: '/contact/' },
+  { name: 'Oaxaca', desc: 'Great for families with older children interested in culture, food, markets and history.', href: '/oaxaca-cultural-tours-day-of-the-dead/' },
+];
+
+const faqs = [
+  { question: 'What are the best Mexico destinations for families?', answer: 'Cancún and Riviera Maya are the most popular for families, with many all-inclusive resorts designed around children and multigenerational groups. Los Cabos and Puerto Vallarta are also good options. We can help you choose based on your family\'s ages and interests.' },
+  { question: 'Can you help with connecting rooms or suite setups?', answer: 'Yes. Room configuration is one of the first things we clarify. We can help find hotels that offer connecting rooms, family suites or villa-style accommodations depending on your group size and budget.' },
+  { question: 'What age groups do you plan trips for?', answer: 'We plan trips for families with infants, toddlers, school-age children, teenagers and multigenerational groups that include grandparents. Each age group has different needs and we plan around them.' },
+  { question: 'Can you coordinate a trip for a large family reunion?', answer: 'Yes. We can help coordinate hotel room blocks, group transfers, shared activities and event logistics for larger family gatherings.' },
+];
+
+const faqSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  mainEntity: faqs.map((f) => ({ '@type': 'Question', name: f.question, acceptedAnswer: { '@type': 'Answer', text: f.answer } })),
+};
+---
+
+<Layout
+  title="Mexico Family Vacation Packages | Viajes GMP"
+  description="Plan family vacations in Mexico with hotels, flights, transfers, activities and bilingual support from Viajes GMP."
+  jsonLd={faqSchema}
+>
+  <Breadcrumbs crumbs={[{ label: 'Mexico Packages', href: '/mexico-vacation-packages/' }, { label: 'Family Vacations' }]} />
+
+  <!-- Hero -->
+  <section style="background:var(--color-sand);padding-block:5rem 4rem;">
+    <div class="container" style="max-width:720px;">
+      <p style="font-size:0.8rem;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:var(--color-terracotta);margin-bottom:0.875rem;">Family Travel to Mexico</p>
+      <h1 style="margin-bottom:1.25rem;">Family Mexico Trips Without the Planning Stress</h1>
+      <p style="font-size:1.05rem;color:var(--color-muted);line-height:1.7;margin-bottom:2rem;">
+        We help families compare destinations, hotels, transfers and activities so the trip works for kids, parents, grandparents and the budget.
+      </p>
+      <p style="font-size:0.875rem;font-weight:600;color:var(--color-ocean);margin-bottom:1.5rem;">Best for: Families with children · Multigenerational groups · School breaks · Resort stays · First-time Mexico trips</p>
+      <div style="display:flex;flex-wrap:wrap;gap:1rem;">
+        <a href="#quote-form" class="btn-primary">Plan a family vacation</a>
+        <a href={business.whatsappUrl} class="btn-whatsapp" target="_blank" rel="noopener noreferrer">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.123.554 4.118 1.524 5.847L0 24l6.318-1.499A11.956 11.956 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 22c-1.903 0-3.68-.51-5.21-1.4l-.374-.221-3.752.89.938-3.658-.243-.381A9.945 9.945 0 012 12C2 6.477 6.477 2 12 2s10 4.477 10 10-4.477 10-10 10z"/></svg>
+          Chat on WhatsApp
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <TrustBar />
+
+  <!-- Planning support -->
+  <section class="section" style="background:var(--color-warm-white);">
+    <div class="container">
+      <div style="display:grid;grid-template-columns:1fr;gap:3rem;" class="family-grid">
+        <div>
+          <h2 style="margin-bottom:1.5rem;">What we think about when planning family trips</h2>
+          <ul style="list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:0.75rem;">
+            {planning.map((item) => (
+              <li style="display:flex;gap:0.75rem;align-items:flex-start;font-size:0.925rem;color:var(--color-muted);">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--color-agave)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink:0;margin-top:2px;" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg>
+                {item}
+              </li>
+            ))}
+          </ul>
+        </div>
+        <div>
+          <h2 style="margin-bottom:1.5rem;">Popular family destinations</h2>
+          <div style="display:flex;flex-direction:column;gap:1rem;">
+            {destinations.map((dest) => (
+              <a href={dest.href} style="display:block;padding:1.25rem;border:1.5px solid #e8e2d8;border-radius:10px;text-decoration:none;transition:border-color 0.2s;" class="dest-link">
+                <strong style="display:block;font-size:0.95rem;color:var(--color-charcoal);margin-bottom:0.3rem;">{dest.name}</strong>
+                <span style="font-size:0.875rem;color:var(--color-muted);line-height:1.5;">{dest.desc}</span>
+              </a>
+            ))}
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <QuoteForm
+    title="Request a Family Trip Quote"
+    intro="Ages, room needs and travel pace matter. Share your family details and we will recommend options that fit."
+  />
+
+  <FAQ items={faqs} title="Questions about Mexico family vacations" />
+
+  <CTABand
+    headline="Tell us who is traveling"
+    body="Ages, room needs and travel pace matter. Share your family details and we will recommend options that fit."
+    primaryLabel="Request a family trip quote"
+  />
+</Layout>
+
+<style>
+  @media (min-width: 768px) {
+    .family-grid { grid-template-columns: 1fr 1fr !important; }
+  }
+  .dest-link:hover { border-color: var(--color-ocean) !important; }
+</style>

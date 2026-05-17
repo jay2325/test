@@ -1,0 +1,104 @@
+---
+import '../styles/global.css';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import SEO from '../components/SEO.astro';
+import JsonLD from '../components/JsonLD.astro';
+import { business } from '../config/business';
+
+interface Props {
+  title: string;
+  description: string;
+  ogTitle?: string;
+  ogDescription?: string;
+  ogImage?: string;
+  canonicalUrl?: string;
+  noindex?: boolean;
+  jsonLd?: object | object[];
+}
+
+const {
+  title,
+  description,
+  ogTitle,
+  ogDescription,
+  ogImage = '/images/og-default.jpg',
+  canonicalUrl,
+  noindex = false,
+  jsonLd,
+} = Astro.props;
+
+const canonical = canonicalUrl ?? new URL(Astro.url.pathname, business.url).href;
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+
+    <SEO
+      title={title}
+      description={description}
+      ogTitle={ogTitle ?? title}
+      ogDescription={ogDescription ?? description}
+      ogImage={ogImage}
+      canonical={canonical}
+      noindex={noindex}
+    />
+
+    <!-- Preconnect for fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,600;0,9..144,700;1,9..144,400&family=Inter:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="sitemap" href="/sitemap-index.xml" />
+
+    {jsonLd && <JsonLD data={jsonLd} />}
+  </head>
+  <body>
+    <Header />
+    <main id="main-content">
+      <slot />
+    </main>
+    <Footer />
+
+    <script>
+      // Sticky header scroll effect
+      const header = document.getElementById('site-header');
+      if (header) {
+        window.addEventListener('scroll', () => {
+          header.classList.toggle('header-scrolled', window.scrollY > 10);
+        }, { passive: true });
+      }
+
+      // Mobile nav toggle
+      const menuBtn = document.getElementById('mobile-menu-btn');
+      const mobileNav = document.getElementById('mobile-nav');
+      if (menuBtn && mobileNav) {
+        menuBtn.addEventListener('click', () => {
+          const open = mobileNav.hasAttribute('data-open');
+          if (open) {
+            mobileNav.removeAttribute('data-open');
+            menuBtn.setAttribute('aria-expanded', 'false');
+          } else {
+            mobileNav.setAttribute('data-open', '');
+            menuBtn.setAttribute('aria-expanded', 'true');
+          }
+        });
+        // Close on outside click
+        document.addEventListener('click', (e) => {
+          if (!header?.contains(e.target as Node)) {
+            mobileNav.removeAttribute('data-open');
+            menuBtn.setAttribute('aria-expanded', 'false');
+          }
+        });
+      }
+    </script>
+  </body>
+</html>

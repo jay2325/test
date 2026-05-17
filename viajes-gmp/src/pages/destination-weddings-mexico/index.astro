@@ -1,0 +1,117 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import TrustBar from '../../components/TrustBar.astro';
+import QuoteForm from '../../components/QuoteForm.astro';
+import FAQ from '../../components/FAQ.astro';
+import CTABand from '../../components/CTABand.astro';
+import Breadcrumbs from '../../components/Breadcrumbs.astro';
+import { business } from '../../config/business';
+
+const weddingDests = [
+  { name: 'Cancún & Riviera Maya', desc: 'Caribbean beaches, all-inclusive resorts, beachfront venues and easy access for US and Canadian guests.', href: '/cancun-riviera-maya-vacation-packages/' },
+  { name: 'Los Cabos', desc: 'Dramatic arch views, luxury resort venues, desert-ocean landscape and upscale celebration atmosphere.', href: '/los-cabos-vacation-packages/' },
+  { name: 'Puerto Vallarta', desc: 'Romantic colonial setting, mountain-sea backdrop and boutique hotel venues.' },
+  { name: 'San Miguel de Allende', desc: 'Colonial architecture, rooftop terraces and one of Mexico\'s most romantic cities.' },
+];
+
+const services = [
+  'Guest travel coordination and information',
+  'Hotel and room block recommendations',
+  'Airport transfer planning for arriving guests',
+  'Pre-wedding and post-wedding activity coordination',
+  'Family and VIP logistics',
+  'Optional honeymoon planning for the couple',
+  'Bilingual guest support in English and Spanish',
+];
+
+const faqs = [
+  { question: 'Do you plan the wedding itself or just the travel?', answer: 'We specialize in the travel coordination side: helping guests get to the right destination, stay at the right hotel and coordinate arrivals, departures and pre/post-wedding activities. For wedding production and venue coordination, we recommend working with a local wedding planner in addition.' },
+  { question: 'Can you help coordinate hotel room blocks for wedding guests?', answer: 'Yes. We can help identify hotels near the wedding venue and assist with group room options. Terms and minimums vary by property and will be confirmed in your quote.' },
+  { question: 'How far in advance should we start planning for a destination wedding?', answer: 'For a destination wedding with 20 or more guests, we recommend starting travel coordination at least 9–12 months in advance. This allows time to secure hotel options, communicate with guests and plan logistics.' },
+  { question: 'Can you plan the honeymoon as well?', answer: 'Yes. We can help plan the honeymoon as an extension of or separate from the wedding trip. Mexico has many options for romantic post-wedding escapes.' },
+];
+
+const faqSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  mainEntity: faqs.map((f) => ({ '@type': 'Question', name: f.question, acceptedAnswer: { '@type': 'Answer', text: f.answer } })),
+};
+---
+
+<Layout
+  title="Mexico Destination Wedding Travel Support | Viajes GMP"
+  description="Support wedding guests with Mexico travel planning, hotel options, transfers, activities and celebration logistics through Viajes GMP."
+  jsonLd={faqSchema}
+>
+  <Breadcrumbs crumbs={[{ label: 'Destination Weddings' }]} />
+
+  <section style="background:var(--color-sand);padding-block:5rem 4rem;">
+    <div class="container" style="max-width:720px;">
+      <p style="font-size:0.8rem;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:var(--color-terracotta);margin-bottom:0.875rem;">Destination Weddings in Mexico</p>
+      <h1 style="margin-bottom:1.25rem;">Travel Support for Destination Weddings in Mexico</h1>
+      <p style="font-size:1.05rem;color:var(--color-muted);line-height:1.7;margin-bottom:2rem;">
+        Help your guests get to the right place, stay at the right hotel and enjoy the celebration weekend with coordinated travel support.
+      </p>
+      <p style="font-size:0.875rem;font-weight:600;color:var(--color-ocean);margin-bottom:1.5rem;">Best for: Couples planning a Mexico wedding · Guest travel coordination · Hotel blocks · Celebration weekends</p>
+      <div style="display:flex;flex-wrap:wrap;gap:1rem;">
+        <a href="#quote-form" class="btn-primary">Plan wedding travel</a>
+        <a href={business.whatsappUrl} class="btn-whatsapp" target="_blank" rel="noopener noreferrer">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.123.554 4.118 1.524 5.847L0 24l6.318-1.499A11.956 11.956 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 22c-1.903 0-3.68-.51-5.21-1.4l-.374-.221-3.752.89.938-3.658-.243-.381A9.945 9.945 0 012 12C2 6.477 6.477 2 12 2s10 4.477 10 10-4.477 10-10 10z"/></svg>
+          Chat on WhatsApp
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <TrustBar />
+
+  <section class="section" style="background:var(--color-warm-white);">
+    <div class="container">
+      <div style="display:grid;grid-template-columns:1fr;gap:3rem;" class="wedding-grid">
+        <div>
+          <h2 style="margin-bottom:1.5rem;">What we help coordinate</h2>
+          <ul style="list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:0.75rem;">
+            {services.map((s) => (
+              <li style="display:flex;gap:0.75rem;align-items:flex-start;font-size:0.925rem;color:var(--color-muted);">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--color-agave)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink:0;margin-top:2px;" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg>
+                {s}
+              </li>
+            ))}
+          </ul>
+        </div>
+        <div>
+          <h2 style="margin-bottom:1.5rem;">Popular wedding destinations</h2>
+          <div style="display:flex;flex-direction:column;gap:0.875rem;">
+            {weddingDests.map((dest) => (
+              <div style="padding:1.125rem 1.25rem;border:1.5px solid #e8e2d8;border-radius:10px;">
+                <strong style="display:block;font-size:0.9rem;color:var(--color-charcoal);margin-bottom:0.25rem;">{dest.name}</strong>
+                <p style="font-size:0.85rem;color:var(--color-muted);line-height:1.5;">{dest.desc}</p>
+                {dest.href && <a href={dest.href} style="font-size:0.8rem;font-weight:600;color:var(--color-ocean);text-decoration:none;margin-top:0.5rem;display:inline-block;">Learn more →</a>}
+              </div>
+            ))}
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <QuoteForm
+    title="Request Wedding Travel Support"
+    intro="Share your wedding destination, estimated guest count, dates and hotel preferences. We will help coordinate the travel side."
+  />
+
+  <FAQ items={faqs} title="Questions about destination wedding travel" />
+
+  <CTABand
+    headline="Keep the guest travel experience clear"
+    body="Share your wedding destination, estimated guest count, dates and hotel preferences. We will help coordinate the travel side."
+    primaryLabel="Request wedding travel support"
+    dark={false}
+  />
+</Layout>
+
+<style>
+  @media (min-width: 768px) {
+    .wedding-grid { grid-template-columns: 1fr 1fr !important; }
+  }
+</style>

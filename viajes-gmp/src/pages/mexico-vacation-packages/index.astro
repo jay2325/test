@@ -1,0 +1,176 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import TrustBar from '../../components/TrustBar.astro';
+import QuoteForm from '../../components/QuoteForm.astro';
+import FAQ from '../../components/FAQ.astro';
+import CTABand from '../../components/CTABand.astro';
+import Breadcrumbs from '../../components/Breadcrumbs.astro';
+import { business } from '../../config/business';
+
+const categories = [
+  { title: 'Beach vacations', desc: 'Cancún, Riviera Maya, Los Cabos, Puerto Vallarta and Riviera Nayarit.', href: '/cancun-riviera-maya-vacation-packages/' },
+  { title: 'Family vacations', desc: 'Resorts, transfers and activities planned around children, grandparents, room setup and pace.', href: '/mexico-family-vacations/' },
+  { title: 'Culture and food trips', desc: 'Oaxaca, Mexico City, Puebla, Mérida, San Miguel de Allende and local experiences.', href: '/oaxaca-cultural-tours-day-of-the-dead/' },
+  { title: 'Weekend getaways', desc: 'Short escapes for couples, friends or families with efficient transfers and curated activities.', href: '/contact/' },
+  { title: 'Groups and events', desc: 'Travel coordination for corporate teams, celebrations, schools, clubs and wedding guests.', href: '/mexico-group-travel/' },
+  { title: 'Flights, hotels and transfers', desc: 'Support for travelers who need logistics handled without a full itinerary.', href: '/contact/' },
+];
+
+const prices = [
+  { label: 'Beach flight support', from: 'USD $145', mxn: 'MXN $2,500', note: 'per person' },
+  { label: 'Hotel stay planning', from: 'USD $285', mxn: 'MXN $5,000', note: 'per room or per person, depending on hotel' },
+  { label: 'Tours and activities', from: 'USD $145', mxn: 'MXN $2,500', note: 'per person' },
+  { label: 'Family vacation package', from: 'USD $1,450', mxn: 'MXN $25,000', note: 'per family package' },
+  { label: 'Weekend getaway', from: 'USD $850', mxn: 'MXN $15,000', note: 'per package' },
+  { label: 'Cruise planning', from: 'USD $1,315', mxn: 'MXN $23,000', note: 'per person' },
+];
+
+const included = [
+  'Flights', 'Hotels', 'Airport transfers', 'Ground transportation',
+  'Tours', 'Activities', 'Restaurants', 'Private guides',
+  'Event coordination', 'Travel support',
+];
+
+const notIncluded = [
+  'Travel insurance', 'Resort fees', 'Tips and gratuities',
+  'Passport or visa fees', 'Optional upgrades', 'Extra baggage',
+  'Personal expenses', 'Activities not listed in the quote',
+];
+
+const faqs = [
+  { question: 'Can you help travelers from the United States and Canada?', answer: 'Yes. Viajes GMP can help US and Canadian travelers plan Mexico trips with bilingual communication and local coordination.' },
+  { question: 'Do you provide prices in USD or CAD?', answer: 'We can provide quote options in your preferred currency when possible. Final pricing depends on dates, availability, traveler count, hotel category and supplier terms.' },
+  { question: 'Can you book flights, hotels and transfers together?', answer: 'Yes. We can help coordinate flights, hotels, transfers, tours and activities depending on your trip needs.' },
+  { question: 'Is every trip custom?', answer: 'Most trips begin with a sample package or destination idea, then we customize around your dates, budget, group and preferences.' },
+];
+
+const faqSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  mainEntity: faqs.map((f) => ({ '@type': 'Question', name: f.question, acceptedAnswer: { '@type': 'Answer', text: f.answer } })),
+};
+---
+
+<Layout
+  title="Mexico Vacation Packages for US and Canadian Travelers | Viajes GMP"
+  description="Explore custom Mexico vacation packages with flights, hotels, transfers, tours and cultural experiences planned by Viajes GMP, a Mexico-based bilingual travel agency."
+  jsonLd={faqSchema}
+>
+  <Breadcrumbs crumbs={[{ label: 'Mexico Vacation Packages' }]} />
+
+  <!-- Hero -->
+  <section style="background:var(--color-sand);padding-block:4rem 3.5rem;">
+    <div class="container" style="max-width:740px;">
+      <p style="font-size:0.8rem;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:var(--color-terracotta);margin-bottom:0.875rem;">Viajes GMP</p>
+      <h1 style="margin-bottom:1.25rem;">Mexico Vacation Packages Built Around You</h1>
+      <p style="font-size:1.05rem;color:var(--color-muted);line-height:1.7;margin-bottom:2rem;">
+        From beach resorts and family trips to cultural weekends and private experiences, Viajes GMP helps you create a Mexico itinerary that fits your dates, budget and travel style.
+      </p>
+      <div style="display:flex;flex-wrap:wrap;gap:1rem;">
+        <a href="#quote-form" class="btn-primary">Request a package quote</a>
+        <a href={business.whatsappUrl} class="btn-whatsapp" target="_blank" rel="noopener noreferrer">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.123.554 4.118 1.524 5.847L0 24l6.318-1.499A11.956 11.956 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 22c-1.903 0-3.68-.51-5.21-1.4l-.374-.221-3.752.89.938-3.658-.243-.381A9.945 9.945 0 012 12C2 6.477 6.477 2 12 2s10 4.477 10 10-4.477 10-10 10z"/></svg>
+          Chat on WhatsApp
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <TrustBar />
+
+  <!-- Overview -->
+  <section class="section" style="background:var(--color-warm-white);">
+    <div class="container" style="max-width:800px;">
+      <h2 style="margin-bottom:1rem;">Choose a starting point. We will customize the rest.</h2>
+      <p style="font-size:1rem;color:var(--color-muted);line-height:1.8;margin-bottom:2.5rem;">
+        Every traveler is different, so our packages are designed as flexible starting points rather than one-size-fits-all trips. Tell us your departure city, travel dates, number of travelers, hotel preferences and budget. We will help compare options for flights, lodging, transfers, activities and add-ons.
+      </p>
+      <div style="display:grid;grid-template-columns:1fr;gap:1rem;" class="cat-grid">
+        {categories.map((cat) => (
+          <a href={cat.href} style="display:block;padding:1.25rem 1.5rem;border:1.5px solid #e8e2d8;border-radius:10px;text-decoration:none;background:var(--color-warm-white);transition:border-color 0.2s,box-shadow 0.2s;" class="cat-card">
+            <strong style="display:block;font-size:0.975rem;color:var(--color-charcoal);margin-bottom:0.3rem;">{cat.title}</strong>
+            <span style="font-size:0.875rem;color:var(--color-muted);line-height:1.5;">{cat.desc}</span>
+          </a>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Sample pricing -->
+  <section class="section section-sand" aria-labelledby="pricing-heading">
+    <div class="container" style="max-width:800px;">
+      <h2 id="pricing-heading" style="margin-bottom:0.75rem;">Sample starting prices</h2>
+      <p style="font-size:0.875rem;color:var(--color-terracotta);background:#fdecea;border:1px solid #f5c6cb;border-radius:8px;padding:0.875rem 1rem;margin-bottom:2rem;line-height:1.6;">
+        <strong>Note:</strong> Prices are starting examples and must be confirmed based on dates, availability, route, hotel category, room type, traveler count and currency. Replace these with current validated offers before publishing.
+      </p>
+      <div style="overflow-x:auto;">
+        <table style="width:100%;border-collapse:collapse;font-size:0.9rem;">
+          <thead>
+            <tr style="background:var(--color-ocean);color:#fff;">
+              <th style="padding:0.75rem 1rem;text-align:left;border-radius:8px 0 0 0;font-weight:600;">Service</th>
+              <th style="padding:0.75rem 1rem;text-align:left;font-weight:600;">Starting from (USD)</th>
+              <th style="padding:0.75rem 1rem;text-align:left;font-weight:600;">Starting from (MXN)</th>
+              <th style="padding:0.75rem 1rem;text-align:left;border-radius:0 8px 0 0;font-weight:600;">Note</th>
+            </tr>
+          </thead>
+          <tbody>
+            {prices.map((row, i) => (
+              <tr style={`background:${i % 2 === 0 ? 'var(--color-warm-white)' : 'var(--color-sand)'};`}>
+                <td style="padding:0.75rem 1rem;color:var(--color-charcoal);">{row.label}</td>
+                <td style="padding:0.75rem 1rem;font-weight:600;color:var(--color-ocean);">{row.from}</td>
+                <td style="padding:0.75rem 1rem;color:var(--color-muted);">{row.mxn}</td>
+                <td style="padding:0.75rem 1rem;color:var(--color-muted);font-size:0.8rem;">{row.note}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+
+      <div style="display:grid;grid-template-columns:1fr;gap:1.5rem;margin-top:2.5rem;" class="inc-grid">
+        <div>
+          <h3 style="font-size:1rem;margin-bottom:0.875rem;color:var(--color-agave);">Can include</h3>
+          <ul style="list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:0.4rem;">
+            {included.map((item) => (
+              <li style="display:flex;align-items:center;gap:0.5rem;font-size:0.875rem;color:var(--color-muted);">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="var(--color-agave)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg>
+                {item}
+              </li>
+            ))}
+          </ul>
+        </div>
+        <div>
+          <h3 style="font-size:1rem;margin-bottom:0.875rem;color:var(--color-terracotta);">Usually not included unless quoted</h3>
+          <ul style="list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:0.4rem;">
+            {notIncluded.map((item) => (
+              <li style="display:flex;align-items:center;gap:0.5rem;font-size:0.875rem;color:var(--color-muted);">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="var(--color-muted)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+                {item}
+              </li>
+            ))}
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <QuoteForm
+    title="Get a package that matches your real trip"
+    intro="Send your dates, departure city and traveler details. We will help you compare realistic options."
+  />
+
+  <FAQ items={faqs} title="Questions about Mexico vacation packages" />
+
+  <CTABand
+    headline="Get a package that matches your real trip"
+    body="Send your dates, departure city and traveler details. We will help you compare realistic options."
+    primaryLabel="Request a package quote"
+  />
+</Layout>
+
+<style>
+  @media (min-width: 640px) {
+    .cat-grid { grid-template-columns: 1fr 1fr !important; }
+    .inc-grid { grid-template-columns: 1fr 1fr !important; }
+  }
+  .cat-card:hover { border-color: var(--color-ocean) !important; box-shadow: 0 4px 16px rgba(10,79,90,0.08); }
+</style>

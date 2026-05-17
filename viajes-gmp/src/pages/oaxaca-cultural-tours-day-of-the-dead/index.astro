@@ -1,0 +1,132 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import TrustBar from '../../components/TrustBar.astro';
+import QuoteForm from '../../components/QuoteForm.astro';
+import FAQ from '../../components/FAQ.astro';
+import CTABand from '../../components/CTABand.astro';
+import Breadcrumbs from '../../components/Breadcrumbs.astro';
+import { business } from '../../config/business';
+
+const highlights = [
+  'Oaxaca City hotel planning',
+  'Airport transfers and local transportation',
+  'Food, market and mezcal experiences',
+  'Artisan village visits (Teotitlán, San Bartolo Coyotepec, Arrazola)',
+  'Monte Albán and archaeological site visits',
+  'Día de Muertos season planning',
+  'Custom itineraries around pace, budget and interests',
+];
+
+const itinerary = [
+  { day: 'Day 1', desc: 'Arrive in Oaxaca City and settle into your hotel.' },
+  { day: 'Day 2', desc: 'Walking tour, markets and local food experience.' },
+  { day: 'Day 3', desc: 'Monte Albán, artisan villages or mezcal route.' },
+  { day: 'Day 4', desc: 'Free time, cooking class or seasonal cultural experience.' },
+  { day: 'Day 5', desc: 'Airport transfer.' },
+];
+
+const faqs = [
+  { question: 'What is the best time to visit Oaxaca?', answer: 'Oaxaca is rewarding year-round. October and November are peak season due to Día de Muertos celebrations, which require early booking. March through May and July through August are also popular. We recommend booking well in advance for the Día de Muertos period.' },
+  { question: 'Is Oaxaca safe for US and Canadian travelers?', answer: 'Oaxaca City is generally considered safe for travelers and is a well-established tourist destination. As with any travel, awareness and local knowledge matter. We can provide guidance and connect you with vetted local operators.' },
+  { question: 'Can you help plan a Día de Muertos trip?', answer: 'Yes. Día de Muertos in Oaxaca is one of Mexico\'s most meaningful cultural events. Planning requires early booking for hotels and specific experiences. We recommend reaching out several months in advance for October and November travel.' },
+  { question: 'Can families with children visit Oaxaca?', answer: 'Yes, especially families with older children who have an interest in culture, food and history. The city is walkable and generally welcoming to families. We can help identify hotels and activities that fit your family\'s needs.' },
+];
+
+const faqSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  mainEntity: faqs.map((f) => ({ '@type': 'Question', name: f.question, acceptedAnswer: { '@type': 'Answer', text: f.answer } })),
+};
+---
+
+<Layout
+  title="Oaxaca Cultural Tours and Día de Muertos Trips | Viajes GMP"
+  description="Plan Oaxaca cultural travel, food experiences, artisan villages, mezcal routes and Día de Muertos trips with Viajes GMP."
+  jsonLd={faqSchema}
+>
+  <Breadcrumbs crumbs={[{ label: 'Mexico Packages', href: '/mexico-vacation-packages/' }, { label: 'Oaxaca Cultural Tours' }]} />
+
+  <!-- Hero -->
+  <section style="background:linear-gradient(135deg,#5E7D5A 0%,#3d5c39 100%);padding-block:5rem 4rem;">
+    <div class="container" style="max-width:720px;">
+      <p style="font-size:0.8rem;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:rgba(255,255,255,0.65);margin-bottom:0.875rem;">Oaxaca, Mexico</p>
+      <h1 style="margin-bottom:1.25rem;color:#fff;">Experience Oaxaca Beyond the Postcard</h1>
+      <p style="font-size:1.05rem;color:rgba(255,255,255,0.85);line-height:1.7;margin-bottom:2rem;">
+        Food, mezcal, markets, artisan villages, colonial streets, ancient sites and Día de Muertos traditions, planned with respect for local culture and realistic travel logistics.
+      </p>
+      <p style="font-size:0.875rem;font-weight:600;color:rgba(255,255,255,0.7);margin-bottom:1.5rem;">Best for: Food lovers · Culture travelers · Couples · Small groups · Photographers · Día de Muertos</p>
+      <div style="display:flex;flex-wrap:wrap;gap:1rem;">
+        <a href="#quote-form" class="btn-primary">Plan my Oaxaca trip</a>
+        <a href={business.whatsappUrl} class="btn-whatsapp" target="_blank" rel="noopener noreferrer">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.123.554 4.118 1.524 5.847L0 24l6.318-1.499A11.956 11.956 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 22c-1.903 0-3.68-.51-5.21-1.4l-.374-.221-3.752.89.938-3.658-.243-.381A9.945 9.945 0 012 12C2 6.477 6.477 2 12 2s10 4.477 10 10-4.477 10-10 10z"/></svg>
+          Chat on WhatsApp
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <TrustBar />
+
+  <!-- Content -->
+  <section class="section" style="background:var(--color-warm-white);">
+    <div class="container">
+      <div style="display:grid;grid-template-columns:1fr;gap:3rem;" class="hl-grid">
+        <div>
+          <h2 style="margin-bottom:1.5rem;">What we can help plan</h2>
+          <ul style="list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:0.625rem;">
+            {highlights.map((h) => (
+              <li style="display:flex;gap:0.75rem;align-items:flex-start;font-size:0.925rem;color:var(--color-muted);">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--color-agave)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink:0;margin-top:2px;" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg>
+                {h}
+              </li>
+            ))}
+          </ul>
+        </div>
+        <div>
+          <h2 style="margin-bottom:1.5rem;">Sample 5-day itinerary</h2>
+          <div style="display:flex;flex-direction:column;gap:1rem;">
+            {itinerary.map((item) => (
+              <div style="display:flex;gap:1rem;align-items:flex-start;">
+                <span style="flex-shrink:0;font-size:0.75rem;font-weight:700;text-transform:uppercase;letter-spacing:0.05em;color:var(--color-agave);background:rgba(94,125,90,0.12);padding:0.25rem 0.625rem;border-radius:20px;white-space:nowrap;">{item.day}</span>
+                <p style="font-size:0.9rem;color:var(--color-muted);line-height:1.6;">{item.desc}</p>
+              </div>
+            ))}
+          </div>
+          <p style="font-size:0.8rem;color:var(--color-muted);margin-top:1rem;font-style:italic;">Sample itinerary. Actual trip planned around your dates, group and preferences.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Día de Muertos callout -->
+  <section class="section-sm section-sand">
+    <div class="container" style="max-width:700px;">
+      <div style="border-left:4px solid var(--color-agave);padding:1.5rem 1.75rem;background:var(--color-warm-white);border-radius:0 10px 10px 0;">
+        <h3 style="margin-bottom:0.75rem;">Planning a Día de Muertos trip to Oaxaca?</h3>
+        <p style="font-size:0.9rem;color:var(--color-muted);line-height:1.7;">
+          Oaxaca's Día de Muertos celebrations (October 31 – November 2) are one of Mexico's most meaningful cultural experiences. Hotel availability is limited and tours fill quickly. If you're planning for this period, we recommend reaching out at least 4–6 months in advance to secure accommodations and ensure a respectful, well-prepared trip.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <QuoteForm
+    title="Request an Oaxaca Quote"
+    intro="Tell us your dates and interests. We will help build a trip that balances culture, comfort, timing and local respect."
+  />
+
+  <FAQ items={faqs} title="Questions about Oaxaca travel" />
+
+  <CTABand
+    headline="Oaxaca rewards thoughtful planning"
+    body="Tell us your dates and interests. We will help build a trip that balances culture, comfort, timing and local respect."
+    primaryLabel="Request an Oaxaca quote"
+    dark={false}
+  />
+</Layout>
+
+<style>
+  @media (min-width: 768px) {
+    .hl-grid { grid-template-columns: 1fr 1fr !important; }
+  }
+</style>

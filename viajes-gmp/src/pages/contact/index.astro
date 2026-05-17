@@ -1,0 +1,94 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import QuoteForm from '../../components/QuoteForm.astro';
+import TrustBar from '../../components/TrustBar.astro';
+import Breadcrumbs from '../../components/Breadcrumbs.astro';
+import { business } from '../../config/business';
+
+const contactMethods = [
+  {
+    icon: `<svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor" style="color:#25D366;" aria-hidden="true"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.123.554 4.118 1.524 5.847L0 24l6.318-1.499A11.956 11.956 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 22c-1.903 0-3.68-.51-5.21-1.4l-.374-.221-3.752.89.938-3.658-.243-.381A9.945 9.945 0 012 12C2 6.477 6.477 2 12 2s10 4.477 10 10-4.477 10-10 10z"/></svg>`,
+    title: 'WhatsApp',
+    desc: 'Fastest way to start a conversation.',
+    link: { href: business.whatsappUrl, label: 'Message us on WhatsApp', external: true },
+  },
+  {
+    icon: `<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="var(--color-ocean)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-10 7L2 7"/></svg>`,
+    title: 'Email',
+    desc: 'Send trip details, group requests or wedding travel questions.',
+    link: { href: `mailto:${business.email}`, label: business.email, external: false },
+  },
+  {
+    icon: `<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="var(--color-ocean)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 10.8 19.79 19.79 0 01.08 2.18 2 2 0 012.08 0h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L6.09 7.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/></svg>`,
+    title: 'Phone',
+    desc: 'Call us during business hours.',
+    link: { href: `tel:${business.phone}`, label: business.phone, external: false },
+  },
+  {
+    icon: `<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="var(--color-ocean)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>`,
+    title: 'Service area',
+    desc: 'Mexico-based travel planning for travelers from Mexico, the United States, Canada and beyond.',
+    text: business.addressOrServiceArea,
+  },
+];
+---
+
+<Layout
+  title="Contact Viajes GMP | Request a Mexico Trip Quote"
+  description="Contact Viajes GMP to request a custom Mexico trip quote for vacations, family travel, group trips, weddings, flights, hotels, transfers and experiences."
+>
+  <Breadcrumbs crumbs={[{ label: 'Contact' }]} />
+
+  <!-- Hero -->
+  <section style="background:var(--color-sand);padding-block:4rem 3rem;">
+    <div class="container" style="max-width:640px;">
+      <p style="font-size:0.8rem;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:var(--color-terracotta);margin-bottom:0.875rem;">Get in touch</p>
+      <h1 style="margin-bottom:1rem;">Tell Us What You Want to Plan</h1>
+      <p style="font-size:1.05rem;color:var(--color-muted);line-height:1.7;">
+        Share your travel dates, destination ideas, number of travelers and budget. We will help you compare realistic options.
+      </p>
+    </div>
+  </section>
+
+  <TrustBar />
+
+  <!-- Contact methods -->
+  <section class="section" style="background:var(--color-warm-white);">
+    <div class="container">
+      <div style="display:grid;grid-template-columns:1fr;gap:1rem;max-width:860px;margin-inline:auto;" class="contact-grid">
+        {contactMethods.map((method) => (
+          <div style="padding:1.5rem;border:1.5px solid #e8e2d8;border-radius:12px;display:flex;flex-direction:column;gap:0.875rem;">
+            <span set:html={method.icon}></span>
+            <div>
+              <strong style="display:block;font-size:1rem;margin-bottom:0.25rem;">{method.title}</strong>
+              <p style="font-size:0.875rem;color:var(--color-muted);line-height:1.5;margin-bottom:0.75rem;">{method.desc}</p>
+              {method.link && (
+                <a
+                  href={method.link.href}
+                  style="font-size:0.9rem;font-weight:600;color:var(--color-ocean);text-decoration:none;"
+                  target={method.link.external ? '_blank' : undefined}
+                  rel={method.link.external ? 'noopener noreferrer' : undefined}
+                >
+                  {method.link.label}
+                </a>
+              )}
+              {method.text && <p style="font-size:0.9rem;color:var(--color-muted);">{method.text}</p>}
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Quote form -->
+  <QuoteForm
+    title="Request a Custom Quote"
+    intro="The more detail you share, the better we can recommend destinations, hotels, transfers and activities."
+  />
+</Layout>
+
+<style>
+  @media (min-width: 640px) {
+    .contact-grid { grid-template-columns: 1fr 1fr !important; }
+  }
+</style>

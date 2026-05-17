@@ -1,0 +1,38 @@
+---
+interface Crumb {
+  label: string;
+  href?: string;
+}
+interface Props {
+  crumbs: Crumb[];
+}
+const { crumbs } = Astro.props;
+---
+
+<nav aria-label="Breadcrumb" style="padding-block:0.875rem;background:var(--color-warm-white);border-bottom:1px solid #e8e2d8;">
+  <div class="container">
+    <ol style="list-style:none;margin:0;padding:0;display:flex;flex-wrap:wrap;align-items:center;gap:0.25rem;" itemscope itemtype="https://schema.org/BreadcrumbList">
+      <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+        <a href="/" itemprop="item" style="font-size:0.8rem;color:var(--color-muted);text-decoration:none;">
+          <span itemprop="name">Home</span>
+        </a>
+        <meta itemprop="position" content="1" />
+      </li>
+      {crumbs.map((crumb, i) => (
+        <li style="display:flex;align-items:center;gap:0.25rem;" itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="color:var(--color-muted);flex-shrink:0;"><polyline points="9 18 15 12 9 6"/></svg>
+          {crumb.href ? (
+            <a href={crumb.href} itemprop="item" style="font-size:0.8rem;color:var(--color-muted);text-decoration:none;">
+              <span itemprop="name">{crumb.label}</span>
+            </a>
+          ) : (
+            <span itemprop="item" style="font-size:0.8rem;color:var(--color-charcoal);font-weight:500;">
+              <span itemprop="name">{crumb.label}</span>
+            </span>
+          )}
+          <meta itemprop="position" content={String(i + 2)} />
+        </li>
+      ))}
+    </ol>
+  </div>
+</nav>
